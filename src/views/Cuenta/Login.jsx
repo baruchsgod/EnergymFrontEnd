@@ -25,7 +25,7 @@ function Login() {
       username: emailRef.current.value,
       password: passwordRef.current.value
     };
-    Axios.post("/login", login)
+    Axios.post("https://energymproject.herokuapp.com/login", login)
       .then(response => {
         if (response.data.message != null) {
           return setError(response.data.message);
@@ -42,7 +42,7 @@ function Login() {
           })
             .then((willDelete) => {
               if (willDelete) {
-                Axios.post("/activarCliente", login)
+                Axios.post("https://energymproject.herokuapp.com/activarCliente", login)
                   .then(response => {
                     if (response.data.icon === 'success')
                       return swal("Su cuenta ha sido Activada", {
@@ -70,7 +70,7 @@ function Login() {
 const setGoogle = () => {
   localStorage.setItem("isAuth", true);
   localStorage.setItem("tipoCuenta", "Cliente");
-  window.open("/auth/google", "_self");
+  window.open("https://energymproject.herokuapp.com/auth/google", "_self");
 }
 
   return (<div>
