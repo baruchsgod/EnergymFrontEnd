@@ -19,7 +19,7 @@ export default function Header() {
         }).then((res) => {
             if (res.data) {
                 localStorage.clear();
-                history.push("/Login");
+                // history.push("/Login");
             }
         })
     };
