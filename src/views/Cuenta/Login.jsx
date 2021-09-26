@@ -64,7 +64,7 @@ function Login() {
         }
       })
       .then(error => {
-        //console.log(error);//recoger el error
+        
       });
   }
 
