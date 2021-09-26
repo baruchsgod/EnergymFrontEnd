@@ -17,7 +17,7 @@ export default function Header() {
         }).then((res) => {
             if (res.data) {
                 localStorage.clear();
-                window.location = "https://energymproject.herokuapp.com/Login";
+                window.location = "/Login";
             }
         })
     };
