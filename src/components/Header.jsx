@@ -13,11 +13,11 @@ export default function Header() {
         Axios({
             method: "GET",
             withCredentials: true,
-            url: "/logout",
+            url: "https://energymproject.herokuapp.com/logout",
         }).then((res) => {
             if (res.data) {
                 localStorage.clear();
-                window.location = "/Login";
+                window.location = "https://energymproject.herokuapp.com/Login";
             }
         })
     };
