@@ -14,7 +14,7 @@ export default function ListFeedback() {
     const [userFeedback, setUserFeedback] = useState([]);
     useEffect(() => {
         if (userFeedback.length === 0) {
-            fetch('/listUserFeedback')
+            fetch('https://energymproject.herokuapp.com/userFeedback/getUserFeedback')
                 .then(response => response.json())
                 .then(data => setUserFeedback(data));
         }
