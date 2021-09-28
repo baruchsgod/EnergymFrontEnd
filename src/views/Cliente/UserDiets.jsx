@@ -14,7 +14,7 @@ export default function ListDiets() {
     const history = useHistory();
     const [userDiets, setUserDiets] = useState([]);
     useEffect(() => {
-        fetch('/listUserDiets')
+        fetch('https://energymproject.herokuapp.com/listUserDiets')
             .then(response => response.json())
             .then(data => setUserDiets(data));
     }, []);
