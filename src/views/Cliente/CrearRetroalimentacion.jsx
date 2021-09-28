@@ -14,10 +14,10 @@ const CreateEvents = () => {
         e.preventDefault();
         if (calificacion >= 1 && calificacion <= 5) {
             const datoRetroalimentacion = { descripcion, calificacion };
-            Axios.post("https://energymproject.herokuapp.com/feedback/crearRetroalimentacion", datoRetroalimentacion)
+            Axios.post("https://energymproject.herokuapp.com/feedback", datoRetroalimentacion)
                 .then(response => {
-                    if (response.data.icon === "success") history.push("/ListUserFeedback");
-                    return swal(response.data.title, response.data.message, response.data.icon);
+                    if (response.data.icon === "success") return swal(response.data.title, response.data.message, response.data.icon);
+                    //history.push("/ListUserFeedback");
                 });
         } else {
             swal("Error", "Verifica la calificación que ingresaste", "error");
