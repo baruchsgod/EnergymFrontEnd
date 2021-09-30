@@ -12,11 +12,13 @@ import swal from 'sweetalert';
 import * as moment from 'moment';
 export default function ListFeedback() {
     const [userFeedback, setUserFeedback] = useState([]);
+    const [userId] = useState(localStorage.getItem('userId') || false);
     useEffect(() => {
-        if (userFeedback.length === 0) {
-            fetch('https://energymproject.herokuapp.com/feedbackUser')
-                .then(response => response.json())
-                .then(data => setUserFeedback(data));
+        if (userFeedback.length === 0 && userId) {
+            Axios.get('https://energymproject.herokuapp.com/feedback/getRetroalimentacionCliente', {
+                params: { userId: userId }
+            })
+                .then(response => setUserFeedback(response.data));
         }
     });
     function verDetalle(descripcion, calificacion, fecha, e) {
