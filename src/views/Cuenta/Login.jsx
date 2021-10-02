@@ -55,13 +55,13 @@ function Login() {
             });
         } else {
           localStorage.setItem("isAuth", true);
-          localStorage.setItem("tipoCuenta", response.data.TipoCuenta);/////guardo el tipo de la cuenta para que pueda acceder a ciertos lugares
-          localStorage.setItem("userName", response.data.fName + " " + response.data.lName);
-          localStorage.setItem("correo", response.data.email);
-          localStorage.setItem("userId", response.data._id);
-          if (response.data.TipoCuenta === 'Cliente') { window.location = "/" }
-          else if (response.data.TipoCuenta === 'Empleado') { window.location = "/InicioEmpleado" }
-          else if (response.data.TipoCuenta === 'Administrador') { window.location = "/InicioAdmin" }
+          localStorage.setItem("tipoCuenta", response.data.user.TipoCuenta);/////guardo el tipo de la cuenta para que pueda acceder a ciertos lugares
+          localStorage.setItem("userName", response.data.user.fName + " " + response.data.user.lName);
+          localStorage.setItem("correo", response.data.user.email);
+          localStorage.setItem("userId", response.data.user._id);
+          if (response.data.user.TipoCuenta === 'Cliente') { window.location = "/" }
+          else if (response.data.user.TipoCuenta === 'Empleado') { window.location = "/InicioEmpleado" }
+          else if (response.data.user.TipoCuenta === 'Administrador') { window.location = "/InicioAdmin" }
         }
       })
       .then(error => {
