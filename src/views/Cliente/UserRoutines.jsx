@@ -14,7 +14,7 @@ export default function ListRoutines() {
     const [userRoutines, setUserRoutines] = useState([]);
     useEffect(() => {
         if (userRoutines.length === 0) {
-            fetch('https://energymproject.herokuapp.com/listUserRoutines')
+            fetch('https://energymproject.herokuapp.com/listUserRoutines', { withCredentials: true })
                 .then(response => response.json())
                 .then(data => setUserRoutines(data));
         }
