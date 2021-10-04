@@ -13,7 +13,7 @@ export default function ListEvents() {
     const [userEvents, setUserEvents] = useState([]);
     useEffect(() => {
         if (userEvents.length === 0) {
-            fetch('/listUserDocuments')
+            fetch('https://energymproject.herokuapp.com/listUserDocuments')
                 .then(response => response.json())
                 .then(data => setUserEvents(data));
         }

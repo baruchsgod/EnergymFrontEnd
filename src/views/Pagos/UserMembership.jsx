@@ -32,7 +32,7 @@ export default function Membership(props) {
             .then((value) => {
                 switch (value) {
                     case "mensual":
-                        Axios.post("/membership/assign", { email: emailClient, membership: "Mensual" })
+                        Axios.post("https://energymproject.herokuapp.com/membership/assign", { email: emailClient, membership: "Mensual" })
                             .then(async response => {
                                 if (response.data.length > 0) {
                                     await swal("La membresía ha sido asignada correctamente!", {
@@ -47,7 +47,7 @@ export default function Membership(props) {
                             })
                         break;
                     case "trimestral":
-                        Axios.post("/membership/assign", { email: emailClient, membership: "Trimestral" })
+                        Axios.post("https://energymproject.herokuapp.com/membership/assign", { email: emailClient, membership: "Trimestral" })
                             .then(async response => {
                                 if (response.data.length > 0) {
                                     await swal("La membresía ha sido asignada correctamente!", {
@@ -62,7 +62,7 @@ export default function Membership(props) {
                             })
                         break;
                     case "semestral":
-                        Axios.post("/membership/assign", { email: emailClient, membership: "Semestral" })
+                        Axios.post("https://energymproject.herokuapp.com/membership/assign", { email: emailClient, membership: "Semestral" })
                             .then(async response => {
                                 if (response.data.length > 0) {
                                     await swal("La membresía ha sido asignada correctamente!", {
@@ -77,7 +77,7 @@ export default function Membership(props) {
                             })
                         break;
                     case "anual":
-                        Axios.post("/membership/assign", { email: emailClient, membership: "Anual" })
+                        Axios.post("https://energymproject.herokuapp.com/membership/assign", { email: emailClient, membership: "Anual" })
                             .then(async response => {
                                 if (response.data.length > 0) {
                                     await swal("La membresía ha sido asignada correctamente!", {
@@ -101,7 +101,7 @@ export default function Membership(props) {
         setTable([]);
         const user = userRef.current.value;
         setEmail(user);
-        Axios.get("/userDetails", {
+        Axios.get("https://energymproject.herokuapp.com/userDetails", {
             params: { idUser: user }
         })
             .then(async (res) => {

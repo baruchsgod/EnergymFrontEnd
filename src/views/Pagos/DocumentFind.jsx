@@ -20,7 +20,7 @@ export default function TextEditor() {
         e.preventDefault();
         setTable([]);
         const document = documentRef.current.value;
-        Axios.get("/payments/find", {
+        Axios.get("https://energymproject.herokuapp.com/payments/find", {
             params: { document: document }
         })
             .then(async (res) => {

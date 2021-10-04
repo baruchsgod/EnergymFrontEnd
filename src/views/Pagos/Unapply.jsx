@@ -14,7 +14,9 @@ export default function UnapplyPayment() {
     const [employee, setEmployee] = useState();
     const [origin, setOrigin] = useState();
     useEffect(() => {
-        Axios.get("/userData")
+        Axios.get("https://energymproject.herokuapp.com/userData", {
+            withCredentials: true
+          })
             .then((res) => {
                 setEmployee(res.data.email);
             })
@@ -23,7 +25,7 @@ export default function UnapplyPayment() {
         e.preventDefault();
         setTable([]);
         const document = documentRef.current.value;
-        Axios.get("/payments/find", {
+        Axios.get("https://energymproject.herokuapp.com/payments/find", {
             params: { document: document }
         })
             .then(async (res) => {
@@ -52,12 +54,12 @@ export default function UnapplyPayment() {
                 dangerMode: true,
             })
                 .then(async (value) => {
-                    Axios.get("/userDetails", {
+                    Axios.get("https://energymproject.herokuapp.com/userDetails", {
                         params: { idUser: value }
                     })
                         .then(async (res) => {
                             if (res.data.length > 0) {
-                                Axios.post("/payment/unapply", {
+                                Axios.post("https://energymproject.herokuapp.com/payment/unapply", {
                                     total: monto,
                                     email: res.data[0].email,
                                     option: "Credit",
@@ -94,12 +96,12 @@ export default function UnapplyPayment() {
                 dangerMode: true,
             })
                 .then(async (value) => {
-                    Axios.get("/userDetails", {
+                    Axios.get("https://energymproject.herokuapp.com/userDetails", {
                         params: { idUser: value }
                     })
                         .then(async (res) => {
                             if (res.data.length > 0) {
-                                Axios.post("/payment/unapply", {
+                                Axios.post("https://energymproject.herokuapp.com/payment/unapply", {
                                     total: monto,
                                     email: res.data[0].email,
                                     option: "Debit",

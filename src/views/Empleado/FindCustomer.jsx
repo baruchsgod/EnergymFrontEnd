@@ -28,7 +28,7 @@ export default function TextEditor() {
         })
             .then(async (willDelete) => {
                 if (willDelete) {
-                    Axios.post("/userRoutine/deleteRoutine", { id: item._id })
+                    Axios.post("https://energymproject.herokuapp.com/userRoutine/deleteRoutine", { id: item._id })
                         .then(async response => {
                             if (response.data.icon === 'El usuario fue actualizado')
                                 return await swal("La rutina ha sido eliminada correctamente!", {
@@ -48,7 +48,7 @@ export default function TextEditor() {
         setCreate("");
         setTable([]);
         const user = userRef.current.value;
-        Axios.get("/userRoutine", {
+        Axios.get("https://energymproject.herokuapp.com/userRoutine", {
             params: { userData: user }
         })
             .then((res) => {

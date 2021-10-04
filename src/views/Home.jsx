@@ -21,7 +21,7 @@ export default function Home() {
         Axios({
             method: "GET",
             withCredentials: true,
-            url: "/userData",
+            url: "https://energymproject.herokuapp.com/userData",
         }).then((res) => {
             if (res.data === "") {
                 localStorage.clear();
@@ -40,7 +40,7 @@ export default function Home() {
     useEffect(() => {
         try {
             if (dataEvents.length === 0) {
-                fetch('/getRecentEvents')
+                fetch('https://energymproject.herokuapp.com/getRecentEvents')
                     .then(response => response.json())
                     .then(data => setDataEvents(data));
             }

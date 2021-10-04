@@ -24,7 +24,7 @@ export default function Diet(props) {
     const history = useHistory();
     useEffect(() => {
         if (!newRoutine) {
-            Axios.get("/userDiet/getDetailsbyId", { params: { userData: _id } })
+            Axios.get("https://energymproject.herokuapp.com/userDiet/getDetailsbyId", { params: { userData: _id } })
                 .then((res) => {
                     if (res.data.length > 0) {
                         setDetail(res.data[0].detalle);
@@ -48,7 +48,7 @@ export default function Diet(props) {
             option: newRoutine
         }
         if (dietInfo.tipoDieta > 0) {
-            Axios.post("/diet", dietInfo)
+            Axios.post("https://energymproject.herokuapp.com/diet", dietInfo)
                 .then(response => {
                     if (response.data.icon !== 'success') {
                         return swal(response.data.title, response.data.message, response.data.icon);

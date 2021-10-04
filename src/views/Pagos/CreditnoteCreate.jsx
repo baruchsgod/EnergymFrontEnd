@@ -27,7 +27,9 @@ export default function Diet(props) {
     const userRef = useRef();
     useEffect(() => {
         if (newPayment) {
-            Axios.get("/userData")
+            Axios.get("https://energymproject.herokuapp.com/userData", {
+                withCredentials: true
+              })
                 .then((res) => {
                     setUser(res.data.email);
                 })
@@ -53,7 +55,7 @@ export default function Diet(props) {
             email: email
         }
         if(montoRef.current.value > 1 && montoRef.current.value <= 500000){
-            Axios.post("/payments/creates", pago)
+            Axios.post("https://energymproject.herokuapp.com/payments/creates", pago)
             .then(async response => {
                 if (response.data.length > 0) {
                     setPayment(response.data);

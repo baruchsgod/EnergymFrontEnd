@@ -15,7 +15,7 @@ export default function DocumentView(props) {
     const [membership, setMembership] = useState("");
     useEffect(() => {
         setError("");
-        Axios.get("/userDetails", { params: { idUser: cliente } })
+        Axios.get("https://energymproject.herokuapp.com/userDetails", { params: { idUser: cliente } })
             .then((res) => {
                 if (res.data.length > 0) {
                     setName(res.data[0].fName);

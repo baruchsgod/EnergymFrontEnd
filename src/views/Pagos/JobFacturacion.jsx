@@ -8,11 +8,13 @@ export default function AutomaticJob() {
     const [user, setUser] = useState();
     const [button, setButton] = useState(false);
     useEffect(() => {
-        Axios.get("/userData")
+        Axios.get("https://energymproject.herokuapp.com/userData", {
+            withCredentials: true
+          })
             .then((res) => {
                 setUser(res.data.email);
             })
-        Axios.get("/payment/getJob")
+        Axios.get("https://energymproject.herokuapp.com/payment/getJob")
             .then(async (res) => {
                 if (res.data.length > 0) {
                     setButton(true);
@@ -33,7 +35,7 @@ export default function AutomaticJob() {
         })
             .then(async (value) => {
                 if (value) {
-                    Axios.post("/payment/postJob")
+                    Axios.post("https://energymproject.herokuapp.com/payment/postJob")
                         .then(async (res) => {
                             if (res.data.length > 0) {
                                 setButton(true);

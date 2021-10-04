@@ -17,7 +17,7 @@ export default function BillingClose(e) {
         e.preventDefault();
         const dateReport = dateRef.current.value;
 
-        Axios.get("/report/close/billing", {
+        Axios.get("https://energymproject.herokuapp.com/report/close/billing", {
             params: { date: dateReport }
         })
             .then(async (res) => {

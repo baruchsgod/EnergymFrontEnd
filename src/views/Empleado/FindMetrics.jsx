@@ -23,7 +23,7 @@ export default function FindMetrics() {
 
     function findCustomerButton(e) {
         e.preventDefault();
-        Axios.get("/getUserMetricsEmpleado", {
+        Axios.get("https://energymproject.herokuapp.com/getUserMetricsEmpleado", {
             params: { correoCliente: email }
         })
             .then((res) => {

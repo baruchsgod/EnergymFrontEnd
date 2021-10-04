@@ -135,9 +135,9 @@ function Login() {
             <br /><br />
             <div className="d-flex mb-4 mt-3">
               <p className="mb-0">Ingresar con</p>
-              <button onClick={setGoogle}><img src={img1} alt="facebook" className="ml-3" /> </button>
+              {/* <button onClick={setGoogle}><img src={img1} alt="facebook" className="ml-3" /> </button>
               <button onClick={setGoogle}><img src={img2} alt="github" className="ml-3" /> </button>
-              <button onClick={setGoogle}><img src={img3} alt="linkedin" className="ml-3" /> </button>
+              <button onClick={setGoogle}><img src={img3} alt="linkedin" className="ml-3" /> </button> */}
               <button onClick={setGoogle}><img src={img4} alt="facebook" className="ml-3" /> </button>
             </div>
             <div className="d-flex align-items-center mt-register">

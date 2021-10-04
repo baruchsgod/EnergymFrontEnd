@@ -40,7 +40,7 @@ export default function BillingReport(props) {
         setError("");
         const user = userRef.current.value;
         setEmail(user);
-        Axios.get("/userDetails", {
+        Axios.get("https://energymproject.herokuapp.com/userDetails", {
             params: { idUser: user }
         })
             .then((res) => {
@@ -148,12 +148,12 @@ export default function BillingReport(props) {
                         estado: "Abierto",
                         date: date1
                     }
-                    Axios.post("/report/billing", report)
+                    Axios.post("https://energymproject.herokuapp.com/report/billing", report)
                         .then(async response => {
                             if (response.data.length > 0) {
                                 //setReport(response.data);
                                 history.push({
-                                    pathname: "/Report/Billing/Details",
+                                    pathname: "https://energymproject.herokuapp.com/Report/Billing/Details",
                                     state: { details: response.data, username: email }
                                 })
                             } else {
@@ -181,7 +181,7 @@ export default function BillingReport(props) {
                             date1: date2,
                             date2: date3
                         };
-                        Axios.post("/report/billing", report)
+                        Axios.post("https://energymproject.herokuapp.com/report/billing", report)
                             .then(async response => {
                                 console.log("este es el largo " + response.data.length);
                                 if (response.data.length > 0) {
@@ -222,7 +222,7 @@ export default function BillingReport(props) {
                             date1: date4,
                             date2: date5
                         };
-                        Axios.post("/report/billing", report)
+                        Axios.post("https://energymproject.herokuapp.com/report/billing", report)
                             .then(async response => {
                                 if (response.data.length > 0) {
                                     //setReport(response.data);

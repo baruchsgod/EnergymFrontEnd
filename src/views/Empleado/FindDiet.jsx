@@ -32,7 +32,7 @@ export default function Diet(props) {
         })
             .then((willDelete) => {
                 if (willDelete) {
-                    Axios.post("/userDiet/deleteDiet", { id: item._id })
+                    Axios.post("https://energymproject.herokuapp.com/userDiet/deleteDiet", { id: item._id })
                         .then(async response => {
                             if (response.data.icon === 'El usuario fue actualizado')
                                 return await swal("La dieta ha sido eliminada correctamente!", {
@@ -48,13 +48,13 @@ export default function Diet(props) {
         setCreate("");
         setTable([]);
         const user = userRef.current.value;
-        Axios.get("/userDiet", {
+        Axios.get("https://energymproject.herokuapp.com/userDiet", {
             params: { userData: user }
         })
             .then((res) => {
                 if (res.data.length > 0) {
                     setData(res.data);
-                    Axios.get("/userDiet/getDetails", {
+                    Axios.get("https://energymproject.herokuapp.com/userDiet/getDetails", {
                         params: { userData: user }
                     })
                         .then((response) => {

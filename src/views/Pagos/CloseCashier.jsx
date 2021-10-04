@@ -29,9 +29,11 @@ export default function CloseCash(props) {
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
     useEffect(async () => {
-        await Axios.get("/userData")
+        await Axios.get("https://energymproject.herokuapp.com/userData", {
+            withCredentials: true
+          })
             .then(async (res) => {
-                await Axios.get("/Payment/getClosure", {
+                await Axios.get("https://energymproject.herokuapp.com/Payment/getClosure", {
                     params: { email: res.data.email }
                 })
                     .then(async (res) => {
@@ -59,16 +61,18 @@ export default function CloseCash(props) {
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
     useEffect(async () => {
-        await Axios.get("/userData")
+        await Axios.get("https://energymproject.herokuapp.com/userData", {
+            withCredentials: true
+          })
             .then(async (res) => {
-                await Axios.get("/Payment/Open", {
+                await Axios.get("https://energymproject.herokuapp.com/Payment/Open", {
                     params: { email: res.data.email }
                 })
                     .then(async (res) => {
                         if (res.data.length > 0) {
                             setPayment(res.data);
                             setId(res.data[0]._id);
-                            await Axios.get("/payment/documents", {
+                            await Axios.get("https://energymproject.herokuapp.com/payment/documents", {
                                 params: { email: res.data[0].Empleado }
                             })
                                 .then(async (respond) => {
@@ -339,7 +343,7 @@ export default function CloseCash(props) {
                 })
                     .then(async (value) => {
                         if (value) {
-                            Axios.post("/payment/closure", cierre)
+                            Axios.post("https://energymproject.herokuapp.com/payment/closure", cierre)
                                 .then(async (res) => {
                                     if (res.data.length === 2) {
                                         setView(true);
@@ -371,7 +375,7 @@ export default function CloseCash(props) {
                     })
                         .then(async (value) => {
                             if (value) {
-                                Axios.post("/payment/closure", cierre)
+                                Axios.post("https://energymproject.herokuapp.com/payment/closure", cierre)
                                     .then(async (res) => {
                                         if (res.data.length === 2) {
                                             setView(true);
@@ -401,7 +405,7 @@ export default function CloseCash(props) {
                     })
                         .then(async (value) => {
                             if (value) {
-                                Axios.post("/payment/closure", cierre)
+                                Axios.post("https://energymproject.herokuapp.com/payment/closure", cierre)
                                     .then(async (res) => {
                                         if (res.data.length === 2) {
                                             setView(true);

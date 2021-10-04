@@ -11,7 +11,7 @@ import { faEye } from '@fortawesome/free-solid-svg-icons';
 export default function OverDue() {
     const [details, setDetails] = useState([]);
     useEffect(() => {
-        Axios.get("/payment/overdue", {
+        Axios.get("https://energymproject.herokuapp.com/payment/overdue", {
             params:{option:"Semestral"}
         })
             .then((res) => {

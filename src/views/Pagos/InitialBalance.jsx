@@ -11,7 +11,9 @@ export default function BalanceInitial(props) {
     const [name, setName] = useState("");
     const [email, setEmail] = useState("");
     useEffect(() => {
-        Axios.get("/userData")
+        Axios.get("https://energymproject.herokuapp.com/userData", {
+            withCredentials: true
+          })
             .then((res) => {
                 setName(res.data.fName);
                 setEmail(res.data.email)
