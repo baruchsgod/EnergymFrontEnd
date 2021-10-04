@@ -40,9 +40,8 @@ export default function Home() {
     useEffect(() => {
         try {
             if (dataEvents.length === 0) {
-                fetch('https://energymproject.herokuapp.com/getRecentEvents')
-                    .then(response => response.json())
-                    .then(data => setDataEvents(data));
+                Axios.get('https://energymproject.herokuapp.com/getRecentEvents')
+                    .then(response => setDataEvents(response.data));
             }
         } catch (error) { }
     }, [dataEvents]);

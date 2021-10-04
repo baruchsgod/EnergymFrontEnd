@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import Axios from "axios";
 import { Button } from "react-bootstrap";
 import Footer from "../../components/Footer";
 import HeaderStatus from "../../components/HeaderStatus";
@@ -16,9 +17,8 @@ export default function ListEvents() {
     const [dataEvents, setDataEvents] = useState([]);
     useEffect(() => {
         if (dataEvents.length === 0) {
-            fetch('/listEvents')
-                .then(response => response.json())
-                .then(data => setDataEvents(data));
+            Axios.get('https://energymproject.herokuapp.com/listEvents')
+                .then(response => setDataEvents(response.data));
         }
     }, [dataEvents]);
     function toReservar(evento, e) {

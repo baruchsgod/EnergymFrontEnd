@@ -25,7 +25,7 @@ function Login() {
       username: emailRef.current.value,
       password: passwordRef.current.value
     };
-    Axios.post("/activar", login)
+    Axios.post("https://energymproject.herokuapp.com/activar", login)
       .then(response => {
         if (response.data.message != null) {
           return setError(response.data.message);
