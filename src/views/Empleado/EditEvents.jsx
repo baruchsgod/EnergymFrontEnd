@@ -20,7 +20,7 @@ const EditEvents = () => {
     function editEvents(e) {
         e.preventDefault();
         const evento = { id, TituloE, DetalleE, CuposE, FechaE, HoraE };
-        Axios.post("/editEvent", evento)
+        Axios.post("https://energymproject.herokuapp.com/editEvent", evento)
             .then(response => {
                 if (response.data.icon === "success") {
                     swal(response.data.title, response.data.message, response.data.icon);

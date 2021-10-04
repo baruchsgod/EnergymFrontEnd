@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import Axios from "axios";
 import Footer from "../../components/Footer";
 import Header from "../../components/Header";
 import HeaderStatus from "../../components/HeaderStatus";
@@ -10,10 +11,10 @@ export default function ListEvents() {
     const [dataAccounts, setDataAccounts] = useState([]);
     useEffect(() => {
         if (dataAccounts.length === 0) {
-            fetch('/listaErrores')
-                .then(response => response.json())
-                .then(data => setDataAccounts(data));
-
+            Axios.get('https://energymproject.herokuapp.com/listaErrores', {
+                withCredentials: true
+            })
+                .then(response => setDataAccounts(response.data));
         }
     });
     const datatable = {

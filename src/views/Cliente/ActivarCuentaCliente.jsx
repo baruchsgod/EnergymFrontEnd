@@ -25,14 +25,18 @@ function Login() {
       username: emailRef.current.value,
       password: passwordRef.current.value
     };
-    Axios.post("https://energymproject.herokuapp.com/activar", login)
+    Axios.post("https://energymproject.herokuapp.com/activar", login, {
+      withCredentials: true
+    })
       .then(response => {
         if (response.data.message != null) {
           return setError(response.data.message);
         } else if (response.data === "No User Exists") {
           setError("Su contraseña o usuario estan incorrectos");
         } else if (response.data === "Su cuenta se encuentra INACTIVA!") {
-          Axios.post("/activarCliente", login)
+          Axios.post("https://energymproject.herokuapp.com/activarCliente", login, {
+            withCredentials: true
+          })
             .then(response => {
               if (response.data.icon === 'success')
                 return swal("Su cuenta ha sido Activada", {

@@ -23,7 +23,7 @@ export default function ListMetrics() {
     function findCustomer(e) {
         e.preventDefault();
         if (correoCliente !== "") {
-            Axios.get("/getUserMetricsEmpleado", {
+            Axios.get("https://energymproject.herokuapp.com/getUserMetricsEmpleado", {
                 params: { correoCliente: correoCliente }
             })
                 .then(response => response.data.length > 0 ? actualizarGrafica(response.data) : clienteInexistente());

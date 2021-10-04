@@ -14,7 +14,7 @@ const CreateEvents = () => {
     function createEvents(e) {
         e.preventDefault();
         const evento = { titulo, detalle, cupos, fecha, hora };
-        Axios.post("/createEvent", evento)
+        Axios.post("https://energymproject.herokuapp.com/createEvent", evento)
             .then(response => {
                 if (response.data.icon === "success") {
                     setTitulo("");

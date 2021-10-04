@@ -23,7 +23,7 @@ const CreateEvents = () => {
     function createEvents(e) {
         e.preventDefault();
         const metrica = { email, fecha, altura, grasaCorporal, biceps, cintura, piernas, espalda };
-        Axios.post("/crearMetrica", metrica)
+        Axios.post("https://energymproject.herokuapp.com/crearMetrica", metrica)
             .then(response => {
                 if (response.data.icon === "success") {
                     setEmailToGraphics(email);

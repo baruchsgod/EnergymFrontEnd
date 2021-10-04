@@ -14,9 +14,8 @@ export default function ListEvents() {
     const [dataAccounts, setDataAccounts] = useState([]);
     useEffect(() => {
         if (dataAccounts.length === 0) {
-            fetch('/adminAccountsClient')
-                .then(response => response.json())
-                .then(data => setDataAccounts(data));
+            Axios.get('https://energymproject.herokuapp.com/adminAccountsClient')
+                .then(response => setDataAccounts(response.data));
         }
     });
     // Funcion que verifica en que estado se encuentra la cuenta para realizar cambio de estado.
@@ -32,7 +31,9 @@ export default function ListEvents() {
         })
             .then((willDelete) => {
                 if (willDelete) {
-                    Axios.post("/estadoCuenta", cuenta)
+                    Axios.post("https://energymproject.herokuapp.com/estadoCuenta", cuenta, {
+                        withCredentials: true
+                    })
                         .then(response => {
                             if (response.data.icon === 'success')
                                 setDataAccounts([]);
@@ -55,11 +56,13 @@ export default function ListEvents() {
         })
             .then((willDelete) => {
                 if (willDelete) {
-                    Axios.post("/estadoCuenta", cuenta)
+                    Axios.post("https://energymproject.herokuapp.com/estadoCuenta", cuenta, {
+                        withCredentials: true
+                    })
                         .then(response => {
                             if (response.data.icon === 'success')
                                 setDataAccounts([]);
-                            return swal("El estado de la cuenta fue actualizado correctamente!", {
+                            return swal("El estado de la cuenta fue actualizada correctamente!", {
                                 icon: "success"
                             });
                         });

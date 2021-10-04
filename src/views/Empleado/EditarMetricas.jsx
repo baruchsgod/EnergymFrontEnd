@@ -22,7 +22,7 @@ const CreateEvents = () => {
     function editarMetrica(e) {
         e.preventDefault();
         const metrica = { id, email, fecha, altura, grasaCorporal, biceps, cintura, piernas, espalda };
-        Axios.post("/editarMetrica", metrica)
+        Axios.post("https://energymproject.herokuapp.com/editarMetrica", metrica)
             .then(response => {
                 if (response.data.icon === "success") {
                     swal(response.data.title, response.data.message, response.data.icon);

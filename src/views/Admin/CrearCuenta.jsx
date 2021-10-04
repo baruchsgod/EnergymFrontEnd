@@ -45,13 +45,12 @@ function Register() {
         };
         if (passRef.current.value === confirmPassRef.current.value) {
             if (enteredAge >= 15 && cliente.tipoCuenta > 0) {
-                Axios.post("/register", cliente)
+                Axios.post("https://energymproject.herokuapp.com/register", cliente)
                     .then(response => {
                         if (response.data.message === "success") {
                             return swal("Éxito!", "La cuenta fue creada exitosamente!", "success");
-
                         }
-                        //  history.push("/");
+
                     })
             } else {
                 if (cliente.tipoCuenta === 0) return setError("Debe seleccionar algún tipo de cuenta");

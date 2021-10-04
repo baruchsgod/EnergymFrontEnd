@@ -58,7 +58,9 @@ const UserSettings = () => {
                 cliente.tipo = "2";
             }
             // Llamada a la ruta del index.js del server
-            Axios.post("/userDataPost", cliente)
+            Axios.post("https://energymproject.herokuapp.com/userDataPost", cliente, {
+                withCredentials: true
+            })
                 .then(response => {
                     setEmail("");
                     return swal(response.data.title, response.data.message, response.data.icon);
@@ -71,7 +73,9 @@ const UserSettings = () => {
         e.preventDefault();
         if (newPass === confirmPass) {
             const passData = { userId, pass, newPass };
-            Axios.post("/userPasswordPost", passData)
+            Axios.post("https://energymproject.herokuapp.com/userPasswordPost", passData, {
+                withCredentials: true
+            })
                 .then(response => {
                     return swal(response.data.title, response.data.message, response.data.icon);
                 });

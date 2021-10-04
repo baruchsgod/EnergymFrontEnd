@@ -4,6 +4,7 @@ import Footer from "../../components/Footer";
 import Header from "../../components/Header";
 import HeaderStatus from "../../components/HeaderStatus";
 import { MDBDataTableV5 } from 'mdbreact';
+import Axios from "axios";
 import '@fortawesome/fontawesome-free/css/all.min.css';
 import 'bootstrap-css-only/css/bootstrap.min.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -15,9 +16,8 @@ export default function ListEvents() {
     const [dataEvents, setDataEvents] = useState([]);
     useEffect(() => {
         if (dataEvents.length === 0) {
-            fetch('/listEvents')
-                .then(response => response.json())
-                .then(data => setDataEvents(data));
+            Axios.get('https://energymproject.herokuapp.com/listEvents')
+                .then(response => setDataEvents(response.data));
         }
     }, [dataEvents]);
     function toClientes(eventId, nombreEvento, e) {
@@ -84,7 +84,7 @@ export default function ListEvents() {
                 backName="Menú general"
                 currentName="Lista de eventos"
             />
-            <section className="calculate-bmi-area fade-in-card" style={{marginBottom: "100px"}}>
+            <section className="calculate-bmi-area fade-in-card" style={{ marginBottom: "100px" }}>
                 <div className="container">
                     <div className="row">
                         <div className="col-sm-8">
@@ -94,7 +94,7 @@ export default function ListEvents() {
                             <Button className="BotonesColorCrear" onClick={(e) => toCreate(e)} type="button" ><FontAwesomeIcon icon={faPlus} /> Crear evento</Button>
                         </div>
                         <div className="col-sm-12">
-                            <hr/>
+                            <hr />
                             <div className="col-sm-12 mt-5">
                                 <MDBDataTableV5
                                     hover entriesOptions={[5, 15, 25]}

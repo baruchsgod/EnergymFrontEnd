@@ -15,7 +15,7 @@ export default function ClientesEvento() {
     const [idEvent] = useState(_id);
     const [nombreevento] = useState(Titulo);
     useEffect(() => {
-        Axios.get('/getClientesEvento', { params: { id: idEvent } })
+        Axios.get('https://energymproject.herokuapp.com/getClientesEvento', { params: { id: idEvent } })
             .then(response => setdataClientes(response.data));
     }, [idEvent]);
     const datatable = {

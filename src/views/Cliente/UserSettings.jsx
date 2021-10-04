@@ -62,7 +62,9 @@ const UserSettings = () => {
         }
         if (enteredAge >= 12) {
             const cliente = { userId, name, lname, phone, email, tipoCuenta, username, date, province, postal, detalle };
-            Axios.post("/userDataPost", cliente)
+            Axios.post("https://energymproject.herokuapp.com/userDataPost", cliente, {
+                withCredentials: true
+            })
                 .then(response => {
                     localStorage.setItem("userName", name + " " + lname);
                     return swal(response.data.title, response.data.message, response.data.icon);

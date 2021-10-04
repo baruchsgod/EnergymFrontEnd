@@ -28,9 +28,8 @@ export default function ListFeedback() {
         let cuatro = 0;
         let cinco = 0;
         if (userFeedback.length === 0) {
-            fetch('https://energymproject.herokuapp.com/feedback/getRetroalimentacionAdmin')
-                .then(response => response.json())
-                .then(data => setUserFeedback(data));
+            Axios.get('https://energymproject.herokuapp.com/feedback/getRetroalimentacionAdmin')
+                .then(response => setUserFeedback(response.data));
         }
         if (userFeedback.length > 0) {
             userFeedback.map((item) => {
