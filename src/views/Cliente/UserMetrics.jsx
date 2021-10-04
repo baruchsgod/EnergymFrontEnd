@@ -16,8 +16,7 @@ export default function ListMetrics() {
             Axios.get('https://energymproject.herokuapp.com/listUserMetrics', {
                 withCredentials: true
             })
-                .then(response => response.json())
-                .then(data => setUserMetrics(data));
+                .then(response => setUserMetrics(response.data));
         }
     });
     const estiloPunto = {

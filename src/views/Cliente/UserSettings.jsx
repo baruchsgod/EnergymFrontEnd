@@ -27,29 +27,28 @@ const UserSettings = () => {
     const [backUrl, setBackUrl] = useState('');
     useEffect(() => {
         getHeaderData();
-        Axios({
-            method: "GET",
-            withCredentials: true,
-            url: "/userData",
-        }).then((res) => {
-            if (res.data === "") {
-                swal("Hubo un error!", "Debes iniciar sesion antes de cambiar tus datos.", "error");
-                history.push("/Login");
-            } else {
-                setId(res.data._id);
-                setNombre(res.data.fName);
-                setLname(res.data.lName);
-                setPhone(res.data.Telefono);
-                setEmail(res.data.email);
-                setTipoCuenta(res.data.TipoCuenta);
-                setUserName(res.data.username);
-                setPostal(res.data.Direccion.CodigoPostal);
-                setDetalle(res.data.Direccion.Detalle);
-                setDate(res.data.fechaNacimiento);
-                setProvince(res.data.Direccion.Provincia);
+        Axios.get('https://energymproject.herokuapp.com/userData', {
+            withCredentials: true
+        })
+            .then((res) => {
+                if (res.data === "") {
+                    swal("Hubo un error!", "Debes iniciar sesion antes de cambiar tus datos.", "error");
+                    history.push("/Login");
+                } else {
+                    setId(res.data._id);
+                    setNombre(res.data.fName);
+                    setLname(res.data.lName);
+                    setPhone(res.data.Telefono);
+                    setEmail(res.data.email);
+                    setTipoCuenta(res.data.TipoCuenta);
+                    setUserName(res.data.username);
+                    setPostal(res.data.Direccion.CodigoPostal);
+                    setDetalle(res.data.Direccion.Detalle);
+                    setDate(res.data.fechaNacimiento);
+                    setProvince(res.data.Direccion.Provincia);
 
-            }
-        });
+                }
+            });
     }, [history]);
     function updateUserSettings(e) {
         e.preventDefault();
@@ -230,7 +229,7 @@ const UserSettings = () => {
                                             <br />
                                             <div className="col-sm-12 mt-3">
                                                 <div className="contact-sub-btn w-100 text-center mt-4">
-                                                    <button type="submit" style={{ padding: "10px", width: "280px", marginLeft:"35px" }} disabled={loading} className="btn btn-effect section-button">Cambio de contraseña</button>
+                                                    <button type="submit" style={{ padding: "10px", width: "280px", marginLeft: "35px" }} disabled={loading} className="btn btn-effect section-button">Cambio de contraseña</button>
                                                 </div>
                                             </div>
                                         </div>

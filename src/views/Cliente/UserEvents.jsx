@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import Axios from "axios";
 import { Button } from "react-bootstrap";
 import Footer from "../../components/Footer";
 import Header from "../../components/Header";
@@ -15,9 +16,10 @@ export default function ListEvents() {
     const [userEvents, setUserEvents] = useState([]);
     useEffect(() => {
         if (userEvents.length === 0) {
-            fetch('/listUserEvents')
-                .then(response => response.json())
-                .then(data => setUserEvents(data));
+            Axios.get('https://energymproject.herokuapp.com/listUserEvents', {
+                withCredentials: true
+            })
+                .then(response => setUserEvents(response.data))
         }
     });
     function eliminar(idEvent, cuposReservados, e) {

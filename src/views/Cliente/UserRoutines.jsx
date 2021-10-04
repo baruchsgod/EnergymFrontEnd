@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Button } from "react-bootstrap";
+import Axios from "axios";
 import { Link } from "react-router-dom";
 import Footer from "../../components/Footer";
 import Header from "../../components/Header";
@@ -14,9 +15,10 @@ export default function ListRoutines() {
     const [userRoutines, setUserRoutines] = useState([]);
     useEffect(() => {
         if (userRoutines.length === 0) {
-            fetch('https://energymproject.herokuapp.com/listUserRoutines', { withCredentials: true })
-                .then(response => response.json())
-                .then(data => setUserRoutines(data));
+            Axios.get('https://energymproject.herokuapp.com/listUserRoutines', {
+                withCredentials: true
+            })
+                .then(response => setUserRoutines(response.data))
         }
     });
     const datatable = {
