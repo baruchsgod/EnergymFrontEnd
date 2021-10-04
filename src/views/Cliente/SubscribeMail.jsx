@@ -32,14 +32,18 @@ function Register() {
         };
         if (emailRef.current.value === dataAccounts.email || !dataAccounts.subscripcionMailchip === "true") {
             if (dataAccounts.subscripcionMailchip === "false") {
-                Axios.post("/validarSuscripcionMailchip", cliente)
+                Axios.post("https://energymproject.herokuapp.com/validarSuscripcionMailchip", cliente, {
+                    withCredentials: true
+                })
                     .then(response => {
                         if (response.data.icon === 'success') {
                             //console.log("ACTIVADO");
                         }
 
                     });
-                Axios.post("/subscribe", cliente)
+                Axios.post("https://energymproject.herokuapp.com/subscribe", cliente, {
+                    withCredentials: true
+                })
                     .then(response => {
                         if (response.data.icon === 'EXITO') {
                             return swal("Suscrito!!", {
@@ -52,7 +56,9 @@ function Register() {
                         //console.log(err);
                     });
             } if (dataAccounts.subscripcionMailchip === "subscrito") {
-                Axios.post("/reactivarSubscripcion", cliente)
+                Axios.post("https://energymproject.herokuapp.com/reactivarSubscripcion", cliente, {
+                    withCredentials: true
+                })
                     .then(response => {
                         if (response.data.icon === 'EXITO') {
                             return swal("Suscrito!!!", {

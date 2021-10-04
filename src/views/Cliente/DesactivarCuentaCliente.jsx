@@ -41,7 +41,9 @@ function Register() {
             })
                 .then((willDelete) => {
                     if (willDelete) {
-                        Axios.post("/desactivarCliente", cliente)
+                        Axios.post("https://energymproject.herokuapp.com/desactivarCliente", cliente, {
+                            withCredentials: true
+                        })
                             .then(response => {
                                 if (response.data.icon === 'success')
                                     setDataAccounts([]);
@@ -50,20 +52,21 @@ function Register() {
                                 });
                             });
                     }
-                    Axios({
-                        method: "GET",
-                        withCredentials: true,
-                        url: "/logout",
-                    }).then((res) => {
-                        if (res.data) {
-                            localStorage.clear();
-                            history.push("/Login");
-                        }
-                    }).then(error => {
-                        //console.log(error); ******Evitar los console.log*****
-                    });
-                    // DESACTIVO MAILCHIMP      
-                    Axios.post("/unsuscribed", cliente)
+                    Axios.get('https://energymproject.herokuapp.com/logout', {
+                        withCredentials: true
+                    })
+                        .then((res) => {
+                            if (res.data) {
+                                localStorage.clear();
+                                history.push("/Login");
+                            }
+                        }).then(error => {
+                            //console.log(error); ******Evitar los console.log*****
+                        });
+                    // DESACTIVO MAILCHIMP  
+                    Axios.post("https://energymproject.herokuapp.com/unsuscribed", cliente, {
+                        withCredentials: true
+                    })
                         .then(response => {
                             if (response.data.icon === 'EXITO') {
                                 return swal("Suscrito!!", {
@@ -75,7 +78,9 @@ function Register() {
                             //console.log(err);
                         });
                     // Me desactivar en la DB el estado de suscrito de Mailchip.
-                    Axios.post("/desactivarSuscripcionMailchip", cliente)
+                    Axios.post("https://energymproject.herokuapp.com/desactivarSuscripcionMailchip", cliente, {
+                        withCredentials: true
+                    })
                         .then(response => {
                             if (response.data.icon === 'success') {
                                 //console.log("ACTIVADO");******Evitar los console.log*****
