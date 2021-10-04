@@ -61,7 +61,7 @@ function Login() {
           localStorage.setItem("userId", response.data.user._id);
           if (response.data.user.TipoCuenta === 'Cliente') { window.location = "/" }
           else if (response.data.user.TipoCuenta === 'Empleado') { window.location = "/InicioEmpleado" }
-          else if (response.data.user.TipoCuenta === 'Administrador') { window.location = "/InicioAdmin" }
+          else if (response.data.user.TipoCuenta === 'Administrador') { window.location = "/" }
         }
       })
       .then(error => {
