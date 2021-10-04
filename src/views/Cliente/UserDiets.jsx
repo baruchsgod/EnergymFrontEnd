@@ -15,12 +15,10 @@ export default function ListDiets() {
     const history = useHistory();
     const [userDiets, setUserDiets] = useState([]);
     useEffect(() => {
-        if (correo) {
-            Axios.get('https://energymproject.herokuapp.com/listUserDiets', {
-                withCredentials: true
-            })
-                .then(response => setUserDiets(response.data));
-        }
+        Axios.get('https://energymproject.herokuapp.com/listUserDiets', {
+            withCredentials: true
+        })
+            .then(response => setUserDiets(response.data));
     }, []);
     function verDetalle(detalleDieta, tipoDieta, e) {
         e.preventDefault();

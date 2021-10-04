@@ -14,7 +14,7 @@ import * as moment from 'moment';
 export default function ListFeedback() {
     const [userFeedback, setUserFeedback] = useState([]);
     useEffect(() => {
-        if (userFeedback.length === 0 && userId) {
+        if (userFeedback.length === 0) {
             Axios.get('https://energymproject.herokuapp.com/feedback/getRetroalimentacionCliente', {
                 withCredentials: true
             })
