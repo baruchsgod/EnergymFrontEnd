@@ -1,6 +1,8 @@
 {
   "name": "client",
   "version": "0.1.0",
+  "homepage": "https://energymproject.netlify.app/",
+  "proxy":"https://energymproject.herokuapp.com",
   "private": true,
   "dependencies": {
     "@ant-design/charts": "^1.1.20",
