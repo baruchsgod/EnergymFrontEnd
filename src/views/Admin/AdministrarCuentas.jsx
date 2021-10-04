@@ -11,19 +11,17 @@ import '@fortawesome/fontawesome-free/css/all.min.css';
 import 'bootstrap-css-only/css/bootstrap.min.css';
 import Axios from "axios";
 export default function ListEvents() {
-    const [dataAccounts, setDataAccounts] = useState([]); 
+    const [dataAccounts, setDataAccounts] = useState([]);
     useEffect(() => {
         if (dataAccounts.length === 0) {
-            fetch('/adminAccounts')
-                .then(response => response.json())
-                .then(data => setDataAccounts(data));
-              
+            Axios.get('https://energymproject.herokuapp.com/adminAccounts')
+                .then(response => setDataAccounts(response.data));
         }
     });
     // Funcion que verifica en que estado se encuentra la cuenta para realizar cambio de estado.
-    function activarCuenta(idUser, estado, email ,e) {
+    function activarCuenta(idUser, estado, email, e) {
         e.preventDefault();
-        const cuenta = { idUser, estado, email};
+        const cuenta = { idUser, estado, email };
         swal({
             title: "Estás seguro que deseas cambiar el estado de la cuenta?",
             text: "Una vez activada la cuenta el usuario podra ingresar al sistema!",
@@ -33,7 +31,7 @@ export default function ListEvents() {
         })
             .then((willDelete) => {
                 if (willDelete) {
-                    Axios.post("/estadoCuenta", cuenta)
+                    Axios.post("https://energymproject.herokuapp.com/estadoCuenta", cuenta)
                         .then(response => {
                             if (response.data.icon === 'success')
                                 setDataAccounts([]);
@@ -44,7 +42,7 @@ export default function ListEvents() {
                 }
             });
     }
-    function desactivarCuenta(idUser, estado, email ,e) {
+    function desactivarCuenta(idUser, estado, email, e) {
         e.preventDefault();
         const cuenta = { idUser, estado, email };
         swal({
@@ -54,24 +52,24 @@ export default function ListEvents() {
             buttons: ["Cancelar", "Aceptar"],
             dangerMode: true,
         })
-            .then((willDelete) => {         
+            .then((willDelete) => {
                 if (willDelete) {
                     let correo = localStorage.getItem("correo");
-                   if(cuenta.email !== correo){     
-                    Axios.post("/estadoCuenta", cuenta)
-                        .then(response => {
-                            if (response.data.icon === 'success')
-                                setDataAccounts([]);
-                            return swal("El estado de la cuenta fue actualizado correctamente!", {
-                                icon: "success"
+                    if (cuenta.email !== correo) {
+                        Axios.post("https://energymproject.herokuapp.com//estadoCuenta", cuenta)
+                            .then(response => {
+                                if (response.data.icon === 'success')
+                                    setDataAccounts([]);
+                                return swal("El estado de la cuenta fue actualizado correctamente!", {
+                                    icon: "success"
+                                });
                             });
+
+                    } else {
+                        return swal("Usted no puede desactivar su propia cuenta de administrador!", {
+                            icon: "error"
                         });
-                    
-                }else{
-                    return swal("Usted no puede desactivar su propia cuenta de administrador!", {
-                        icon: "error"
-                    });
-                }
+                    }
                 }
             });
     }
@@ -113,9 +111,9 @@ export default function ListEvents() {
                 Direccion: item.Direccion.Provincia,
                 Telefono: item.Telefono,
                 Postal: item.Direccion.CodigoPostal,
-                Desactivar: item.EstadoCuenta === "Inactivo" ? 
-                    <Button onClick={(e) => activarCuenta(item._id, item.EstadoCuenta, item.email ,e)} type="button" className="BotonesColorCrear"><FontAwesomeIcon icon={faUnlock} /> Activar</Button> :
-                    <Button onClick={(e) => desactivarCuenta(item._id, item.EstadoCuenta,  item.email, e)} type="button" className="BotonesColorEliminar"><FontAwesomeIcon icon={faLock} /> Desactivar</Button>
+                Desactivar: item.EstadoCuenta === "Inactivo" ?
+                    <Button onClick={(e) => activarCuenta(item._id, item.EstadoCuenta, item.email, e)} type="button" className="BotonesColorCrear"><FontAwesomeIcon icon={faUnlock} /> Activar</Button> :
+                    <Button onClick={(e) => desactivarCuenta(item._id, item.EstadoCuenta, item.email, e)} type="button" className="BotonesColorEliminar"><FontAwesomeIcon icon={faLock} /> Desactivar</Button>
             }))
     };
     return (
