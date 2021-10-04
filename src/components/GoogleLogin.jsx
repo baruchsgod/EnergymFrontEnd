@@ -3,7 +3,9 @@ import Axios from "axios";
 
 export default function GetGoogleLogin(){
     useEffect(() => {
-        Axios.get("/user")
+        Axios.get("https://energymproject.herokuapp.com/user", {
+            withCredentials: true
+          })
         .then((res) => {
             localStorage.setItem("isAuth", true);
             localStorage.setItem("tipoCuenta", res.data.TipoCuenta);/////guardo el tipo de la cuenta para que pueda acceder a ciertos lugares

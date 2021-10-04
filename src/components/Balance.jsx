@@ -9,7 +9,7 @@ export default function Balance(props) {
         e.preventDefault();
         const emailUser = props.email;
         if (montoSta >= 0 && montoSta <= 20000 && montoSta) {
-            Axios.post("/balance/asignar", { email: emailUser, saldoInicial: montoSta })
+            Axios.post("https://energymproject.herokuapp.com/balance/asignar", { email: emailUser, saldoInicial: montoSta })
                 .then(async response => {
                     if (response.data.length > 0) {
                         await swal("El balance inicial ha sido asignado correctamente!", { icon: "success" });

@@ -153,7 +153,7 @@ export default function BillingReport(props) {
                             if (response.data.length > 0) {
                                 //setReport(response.data);
                                 history.push({
-                                    pathname: "https://energymproject.herokuapp.com/Report/Billing/Details",
+                                    pathname: "/Report/Billing/Details",
                                     state: { details: response.data, username: email }
                                 })
                             } else {
