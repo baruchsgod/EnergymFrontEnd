@@ -19,7 +19,7 @@ export default function ListMetrics() {
                     'Content-Type': 'application/json',
                     'Cache': 'no-cache'
                 },
-                credentials: 'same-origin'
+                withCredentials: true
             })
                 .then(response => response.json())
                 .then(data => setUserMetrics(data));
