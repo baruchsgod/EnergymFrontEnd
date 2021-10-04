@@ -16,12 +16,14 @@ export default function OpenCashier() {
     const [_id, set_Id] = useState();
     const history = useHistory();
     useEffect(() => {
-        Axios.get("/payment/setBalance")
+        Axios.get("https://energymproject.herokuapp.com/payment/setBalance")
             .then(async (res) => {
                 if (res.data.length > 0) {
                     setInitial(res.data[0].SaldoInicial);
                     set_Id(res.data[0]._id);
-                    Axios.get("/userData")
+                    Axios.get("https://energymproject.herokuapp.com/userData", {
+                        withCredentials: true
+                      })
                         .then((res) => {
                             setEmail(res.data.email);
                         })
@@ -42,7 +44,7 @@ export default function OpenCashier() {
     const categoriaRef = useRef();
     function setOption(props) {
         if (props === 1) {
-            Axios.get("/Payment/Open", {
+            Axios.get("https://energymproject.herokuapp.com/Payment/Open", {
                 params: { email: email }
             })
                 .then(async (res) => {
@@ -60,7 +62,7 @@ export default function OpenCashier() {
                         })
                             .then(async (value) => {
                                 if (value) {
-                                    Axios.post("/payment/arching", {
+                                    Axios.post("https://energymproject.herokuapp.com/payment/arching", {
                                         monto: 0,
                                         initial: initial,
                                         email: email,
@@ -86,7 +88,7 @@ export default function OpenCashier() {
                     }
                 })
         } else if (props === 2) {
-            Axios.get("/Payment/Open", {
+            Axios.get("https://energymproject.herokuapp.com/Payment/Open", {
                 params: { email: email }
             })
                 .then(async (res) => {
@@ -101,7 +103,7 @@ export default function OpenCashier() {
                     }
                 });
         } else {
-            Axios.get("/Payment/Open", {
+            Axios.get("https://energymproject.herokuapp.com/Payment/Open", {
                 params: { email: email }
             })
                 .then(async (res) => {
@@ -119,7 +121,7 @@ export default function OpenCashier() {
                         })
                             .then(async (value) => {
                                 if (value) {
-                                    Axios.post("/payment/arching", {
+                                    Axios.post("https://energymproject.herokuapp.com/payment/arching", {
                                         monto: 0,
                                         initial: 0,
                                         email: email,
@@ -132,7 +134,7 @@ export default function OpenCashier() {
                                                     icon: "success"
                                                 });
 
-                                                history.push("/EmpleadoMenuCaja");
+                                                history.push("https://energymproject.herokuapp.com/EmpleadoMenuCaja");
                                             } else if (res.data.length === 2) {
                                                 return await swal(res.data[1].message, {
                                                     icon: "error"
@@ -171,7 +173,7 @@ export default function OpenCashier() {
             })
                 .then(async (value) => {
                     if (value) {
-                        Axios.post("/payment/arching", {
+                        Axios.post("https://energymproject.herokuapp.com/payment/arching", {
                             monto: monto,
                             categoria: categoria,
                             initial: initial,
