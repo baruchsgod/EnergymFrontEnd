@@ -26,7 +26,9 @@ function Login() {
       password: passwordRef.current.value
     };
 
-    Axios.post("https://energymproject.herokuapp.com/login", login)
+    Axios.post("https://energymproject.herokuapp.com/login", login, {
+      withCredentials: true
+    })
       .then(response => {
         if (response.data.message != null) {
           return setError(response.data.message);

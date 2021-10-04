@@ -22,7 +22,7 @@ export default function ListDiets() {
             })
                 .then(response => setUserDiets(response.data));
         }
-    }, []);
+    }, [correo]);
     function verDetalle(detalleDieta, tipoDieta, e) {
         e.preventDefault();
         history.push({ pathname: '/UserDietDetail', state: { detalleDieta: detalleDieta, tipoDieta: tipoDieta } });
