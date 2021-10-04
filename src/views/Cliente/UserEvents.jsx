@@ -33,7 +33,7 @@ export default function ListEvents() {
         })
             .then((willDelete) => {
                 if (willDelete) {
-                    Axios.post("/borrarReserva", reserva)
+                    Axios.post("https://energymproject.herokuapp.com/borrarReserva", reserva)
                         .then(response => {
                             if (response.data.icon === 'success')
                                 setUserEvents([]);

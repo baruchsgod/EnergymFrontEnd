@@ -14,15 +14,14 @@ import { useHistory } from "react-router-dom";
 export default function ListDiets() {
     const history = useHistory();
     const [userDiets, setUserDiets] = useState([]);
-    const [correo] = useState(localStorage.getItem('correo') || false);
     useEffect(() => {
         if (correo) {
             Axios.get('https://energymproject.herokuapp.com/listUserDiets', {
-                params: { correo: correo }
+                withCredentials: true
             })
                 .then(response => setUserDiets(response.data));
         }
-    }, [correo]);
+    }, []);
     function verDetalle(detalleDieta, tipoDieta, e) {
         e.preventDefault();
         history.push({ pathname: '/UserDietDetail', state: { detalleDieta: detalleDieta, tipoDieta: tipoDieta } });

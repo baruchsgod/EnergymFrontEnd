@@ -75,7 +75,7 @@ const UserSettings = () => {
         e.preventDefault();
         if (newPass === confirmPass) {
             const passData = { userId, pass, newPass };
-            Axios.post("/userPasswordPost", passData)
+            Axios.post("https://energymproject.herokuapp.com/userPasswordPost", passData)
                 .then(response => {
                     return swal(response.data.title, response.data.message, response.data.icon);
                 });

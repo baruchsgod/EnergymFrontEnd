@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import Axios from "axios";
 import Footer from "../../components/Footer";
 import Header from "../../components/Header";
 import HeaderStatus from "../../components/HeaderStatus";
@@ -8,14 +9,15 @@ import 'bootstrap-css-only/css/bootstrap.min.css';
 import * as moment from 'moment';
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import {  faEye } from '@fortawesome/free-solid-svg-icons';
+import { faEye } from '@fortawesome/free-solid-svg-icons';
 export default function ListEvents() {
     const [userEvents, setUserEvents] = useState([]);
     useEffect(() => {
         if (userEvents.length === 0) {
-            fetch('https://energymproject.herokuapp.com/listUserDocuments')
-                .then(response => response.json())
-                .then(data => setUserEvents(data));
+            Axios.get('https://energymproject.herokuapp.com/listUserDocuments', {
+                withCredentials: true
+            })
+                .then(response => setUserEvents(response.data));
         }
     });
     const datatable = {
@@ -65,7 +67,7 @@ export default function ListEvents() {
                 Estado: item.estado,
                 Monto: item.monto.toFixed(0),
                 IVA: item.iva.toFixed(0),
-                Detalle: <Link to={{ pathname: "/Document/Find/Print", state: { _id: item._id, monto: item.monto, numDocumento: item.numDocumento, usuario: item.usuario, tipoDoc: item.tipoDoc, iva: item.iva, cliente: item.email, fecha: moment(item.fecha).format('l') } }} ><button type="button" className="BotonesColor p-1 rounded"><FontAwesomeIcon icon={faEye}/></button></Link>,
+                Detalle: <Link to={{ pathname: "/Document/Find/Print", state: { _id: item._id, monto: item.monto, numDocumento: item.numDocumento, usuario: item.usuario, tipoDoc: item.tipoDoc, iva: item.iva, cliente: item.email, fecha: moment(item.fecha).format('l') } }} ><button type="button" className="BotonesColor p-1 rounded"><FontAwesomeIcon icon={faEye} /></button></Link>,
             }))
     };
     return (

@@ -14,9 +14,10 @@ function Register() {
     // Obtiene datos del usuario conectado. 
     useEffect(() => {
         if (dataAccounts.length === 0) {
-            fetch('/user')
-                .then(response => response.json())
-                .then(data => setDataAccounts(data));
+            Axios.get('https://energymproject.herokuapp.com/user', {
+                withCredentials: true
+            })
+                .then(response => setDataAccounts(response.data));
         }
     });
     function setValues(e) {

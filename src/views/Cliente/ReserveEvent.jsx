@@ -21,7 +21,9 @@ const ReserveEvent = () => {
         e.preventDefault();
         const reserva = { idEvent, cuposReserva };
         if (cuposReserva >= 1 && cuposReserva <= 5) {
-            Axios.post("/reservaEventoPost", reserva)
+            Axios.post("https://energymproject.herokuapp.com/reservaEventoPost", reserva, {
+                withCredentials: true
+            })
                 .then(response => {
                     if (response.data.icon === 'success') history.push("/ListUserEvents");
                     return swal(response.data.title, response.data.message, response.data.icon);
@@ -48,7 +50,7 @@ const ReserveEvent = () => {
                                     <div className="col-sm-12">
                                         <h2 className="para-color mb-3">Información del evento</h2>
                                     </div>
-                                    <hr style={{width: "80%"}}/>
+                                    <hr style={{ width: "80%" }} />
                                 </div>
                             </div>
                             <div className="col-sm-12 mt-3">

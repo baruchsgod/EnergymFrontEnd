@@ -13,11 +13,10 @@ import swal from 'sweetalert';
 import * as moment from 'moment';
 export default function ListFeedback() {
     const [userFeedback, setUserFeedback] = useState([]);
-    const [userId] = useState(localStorage.getItem('userId') || false);
     useEffect(() => {
         if (userFeedback.length === 0 && userId) {
             Axios.get('https://energymproject.herokuapp.com/feedback/getRetroalimentacionCliente', {
-                params: { userId: userId }
+                withCredentials: true
             })
                 .then(response => setUserFeedback(response.data));
         }
