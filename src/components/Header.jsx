@@ -20,7 +20,7 @@ export default function Header() {
                 localStorage.clear();
                 history.push("/Login");
             }else{
-                console.log("this is the header data "+ res.data)
+                console.log("this is the header data "+ res)
                 localStorage.setItem("userName", res.data.user.fName + " " + res.data.user.lName);
                 localStorage.setItem("correo", res.data.user.email);
                 localStorage.setItem("userId", res.data.user._id);
