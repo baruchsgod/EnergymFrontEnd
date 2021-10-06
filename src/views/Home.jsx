@@ -17,22 +17,22 @@ library.add(faCoffee, faSignOutAlt);
 export default function Home() {
     const history = useHistory();
     const [dataEvents, setDataEvents] = useState('');
-    useEffect(() => {
-        Axios({
-            method: "GET",
-            withCredentials: true,
-            url: "https://energymproject.herokuapp.com/user",
-        }).then((res) => {
-            if (res.data === "") {
-                localStorage.clear();
-                history.push("/Login");
-            }else{
-                localStorage.setItem("userName", res.data.user.fName + " " + res.data.user.lName);
-                localStorage.setItem("correo", res.data.user.email);
-                localStorage.setItem("userId", res.data.user._id);
-            }
-        });
-    }, [history]);
+    // useEffect(() => {
+    //     Axios({
+    //         method: "GET",
+    //         withCredentials: true,
+    //         url: "https://energymproject.herokuapp.com/user",
+    //     }).then((res) => {
+    //         if (res.data === "") {
+    //             localStorage.clear();
+    //             history.push("/Login");
+    //         }else{
+    //             localStorage.setItem("userName", res.data.user.fName + " " + res.data.user.lName);
+    //             localStorage.setItem("correo", res.data.user.email);
+    //             localStorage.setItem("userId", res.data.user._id);
+    //         }
+    //     });
+    // }, [history]);
     useEffect(() => {
         try {
             new WOW.WOW({

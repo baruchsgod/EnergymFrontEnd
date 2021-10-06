@@ -1,4 +1,4 @@
-import React from 'react';
+import {React, useEffect} from 'react';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCoffee, faSignOutAlt } from '@fortawesome/free-solid-svg-icons';
@@ -11,6 +11,23 @@ import HeaderEmpleado from "./HeaderEmpleado";
 library.add(faCoffee, faSignOutAlt);
 export default function Header() {
     const history = useHistory();
+    useEffect(() => {
+        Axios({
+            method: "GET",
+            withCredentials: true,
+            url: "https://energymproject.herokuapp.com/user",
+        }).then((res) => {
+            if (res.data === "") {
+                localStorage.clear();
+                history.push("/Login");
+            }else{
+                console.log("this is the header data "+res.data)
+                localStorage.setItem("userName", res.data.user.fName + " " + res.data.user.lName);
+                localStorage.setItem("correo", res.data.user.email);
+                localStorage.setItem("userId", res.data.user._id);
+            }
+        });
+    }, [history]);
     const logOut = () => {
         Axios({
             method: "GET",
