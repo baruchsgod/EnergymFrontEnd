@@ -12,22 +12,23 @@ library.add(faCoffee, faSignOutAlt);
 export default function Header() {
     const history = useHistory();
     useEffect(() => {
-        Axios({
-            method: "GET",
-            withCredentials: true,
-            url: "https://energymproject.herokuapp.com/user",
-        }).then((res) => {
+        const userCookie = localStorage.getItem('userName');
+        if(!userCookie){
+            Axios.get("https://energymproject.herokuapp.com/user", {withCredentials: true})
+        .then(async (res) => {
             if (res.data === "") {
                 localStorage.clear();
                 history.push("/Login");
             }else{
-                console.log("this is the header data "+res.data)
+                console.log("this is the header data "+ res.data)
                 localStorage.setItem("userName", res.data.user.fName + " " + res.data.user.lName);
                 localStorage.setItem("correo", res.data.user.email);
                 localStorage.setItem("userId", res.data.user._id);
             }
         });
-    }, [history]);
+        }
+        
+    }, []);
     const logOut = () => {
         Axios({
             method: "GET",

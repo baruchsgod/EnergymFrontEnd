@@ -74,6 +74,7 @@ function Login() {
   const setGoogle = () => {
     localStorage.setItem("isAuth", true);
     localStorage.setItem("tipoCuenta", "Cliente");
+    localStorage.setItem("userName", "");
     window.open("https://energymproject.herokuapp.com/auth/google", "_self");
   }
 
