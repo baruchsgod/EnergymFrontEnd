@@ -21,11 +21,15 @@ export default function Home() {
         Axios({
             method: "GET",
             withCredentials: true,
-            url: "https://energymproject.herokuapp.com/userData",
+            url: "https://energymproject.herokuapp.com/user",
         }).then((res) => {
             if (res.data === "") {
                 localStorage.clear();
                 history.push("/Login");
+            }else{
+                localStorage.setItem("userName", res.data.user.fName + " " + res.data.user.lName);
+                localStorage.setItem("correo", res.data.user.email);
+                localStorage.setItem("userId", res.data.user._id);
             }
         });
     }, [history]);
