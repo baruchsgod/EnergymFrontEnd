@@ -56,7 +56,7 @@ export default function ListEvents() {
                 if (willDelete) {
                     let correo = localStorage.getItem("correo");
                     if (cuenta.email !== correo) {
-                        Axios.post("https://energymproject.herokuapp.com//estadoCuenta", cuenta)
+                        Axios.post("https://energymproject.herokuapp.com/estadoCuenta", cuenta)
                             .then(response => {
                                 if (response.data.icon === 'success')
                                     setDataAccounts([]);
