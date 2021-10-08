@@ -171,7 +171,7 @@ export default function Diet(props) {
                     <div className="row bmi-box mt-5 mb-5">
                         <div className="col-sm-12 fade-in-card">
                             <div className="contact-sub-btn text-center">
-                                <button type="submit" className="btn btn-effect section-button" style={{ width: "300px", padding: "10px" }}>Crear dieta</button>
+                                <button type="submit" className="btn btn-effect section-button" style={{ width: "300px", padding: "10px" }}>Guardar cambios</button>
                             </div>
                         </div>
                     </div>
