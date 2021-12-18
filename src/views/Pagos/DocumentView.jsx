@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import global from "../../global.js";
 import InvoiceTemplate from "../../components/InvoiceTemplate";
 import Footer from "../../components/Footer";
 import Header from "../../components/Header";
@@ -15,7 +16,7 @@ export default function DocumentView(props) {
     const [membership, setMembership] = useState("");
     useEffect(() => {
         setError("");
-        Axios.get("https://energymproject.herokuapp.com/userDetails", { params: { idUser: cliente } })
+        Axios.get(global.backEndUrl + "/userDetails", { params: { idUser: cliente } })
             .then((res) => {
                 if (res.data.length > 0) {
                     setName(res.data[0].fName);

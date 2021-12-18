@@ -1,4 +1,5 @@
-import React, { useState, useRef, useEffect } from 'react'
+import React, { useState, useRef, useEffect } from 'react';
+import global from "../../global.js"
 import Footer from "../../components/Footer";
 import Header from "../../components/Header";
 import { CKEditor } from '@ckeditor/ckeditor5-react';
@@ -24,7 +25,7 @@ export default function Diet(props) {
     const history = useHistory();
     useEffect(() => {
         if (!newRoutine) {
-            Axios.get("https://energymproject.herokuapp.com/userDiet/getDetailsbyId", { params: { userData: _id } })
+            Axios.get(global.backEndUrl + "/userDiet/getDetailsbyId", { params: { userData: _id } })
                 .then((res) => {
                     if (res.data.length > 0) {
                         setDetail(res.data[0].detalle);

@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import global from "../../global.js";
 import { Button } from "react-bootstrap";
 import Footer from "../../components/Footer";
 import Header from "../../components/Header";
@@ -16,7 +17,7 @@ export default function ListEvents() {
     const [dataEvents, setDataEvents] = useState([]);
     useEffect(() => {
         if (dataEvents.length === 0) {
-            Axios.get('https://energymproject.herokuapp.com/listEvents')
+            Axios.get(global.backEndUrl + "/listEvents")
                 .then(response => setDataEvents(response.data));
         }
     }, [dataEvents]);

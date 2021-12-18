@@ -1,4 +1,5 @@
-import React, { useState, useRef } from 'react'
+import React, { useState, useRef } from 'react';
+import global from "../../global.js";
 import Footer from "../../components/Footer";
 import Header from "../../components/Header";
 import Axios from "axios";
@@ -20,7 +21,7 @@ export default function TextEditor() {
         e.preventDefault();
         setTable([]);
         const document = documentRef.current.value;
-        Axios.get("https://energymproject.herokuapp.com/payments/find", {
+        Axios.get(global.backEndUrl + "/payments/find", {
             params: { document: document }
         })
             .then(async (res) => {

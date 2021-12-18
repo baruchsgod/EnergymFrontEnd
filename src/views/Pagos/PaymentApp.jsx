@@ -1,4 +1,5 @@
 import React, { useRef, useState, useEffect } from "react";
+import global from "../../global.js";
 import Footer from "../../components/Footer";
 import Header from "../../components/Header";
 import HeaderStatus from "../../components/HeaderStatus";
@@ -18,7 +19,7 @@ export default function AppliedPayment() {
     let amounts = [];
     let ids = [];
     useEffect(() => {
-        Axios.get("https://energymproject.herokuapp.com/userData", {
+        Axios.get(global.backEndUrl + "/userData", {
             withCredentials: true
           })
             .then((res) => {
@@ -29,13 +30,13 @@ export default function AppliedPayment() {
         e.preventDefault();
         const user = userRef.current.value;
         setEmail(user);
-        Axios.get("https://energymproject.herokuapp.com/userDetails", {
+        Axios.get(global.backEndUrl + "/userDetails", {
             params: { idUser: user }
         })
             .then(async (res) => {
                 if (res.data.length > 0) {
                     setId(res.data[0]._id);
-                    Axios.get("https://energymproject.herokuapp.com/payment/application", {
+                    Axios.get(global.backEndUrl + "/payment/application", {
                         params: { email: user }
                     })
                         .then(async (response) => {
@@ -71,7 +72,7 @@ export default function AppliedPayment() {
                 })
                     .then(async (value) => {
                         if (value) {
-                            Axios.post("https://energymproject.herokuapp.com/payment/clearing", {
+                            Axios.post(global.backEndUrl + "/payment/clearing", {
                                 total: total,
                                 email: email,
                                 option: "Balanced",
@@ -110,7 +111,7 @@ export default function AppliedPayment() {
                 })
                     .then(async (value) => {
                         if (value) {
-                            Axios.post("https://energymproject.herokuapp.com/payment/clearing", {
+                            Axios.post(global.backEndUrl + "/payment/clearing", {
                                 total: total,
                                 email: email,
                                 option: "Overpaid",
@@ -149,7 +150,7 @@ export default function AppliedPayment() {
                 })
                     .then(async (value) => {
                         if (value) {
-                            Axios.post("https://energymproject.herokuapp.com/payment/clearing", {
+                            Axios.post(global.backEndUrl + "/payment/clearing", {
                                 total: total,
                                 email: email,
                                 option: "Underpaid",

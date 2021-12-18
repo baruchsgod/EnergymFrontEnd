@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import global from "../../global.js"
 import Footer from "../../components/Footer";
 import Header from "../../components/Header";
 import HeaderStatus from "../../components/HeaderStatus";
@@ -14,7 +15,7 @@ const CreateEvents = () => {
         e.preventDefault();
         if (calificacion >= 1 && calificacion <= 5) {
             const datoRetroalimentacion = { descripcion, calificacion };
-            Axios.post("https://energymproject.herokuapp.com/feedback", datoRetroalimentacion, {
+            Axios.post(global.backEndUrl + "/feedback", datoRetroalimentacion, {
                 withCredentials: true
             })
                 .then(response => {

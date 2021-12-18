@@ -1,4 +1,5 @@
-import React, { useState, useRef } from 'react'
+import React, { useState, useRef } from 'react';
+import global from "../../global.js";
 import Footer from "../../components/Footer";
 import Header from "../../components/Header";
 import Axios from "axios";
@@ -19,12 +20,12 @@ export default function TextEditor() {
         e.preventDefault();
         setTable([]);
         const user = userRef.current.value;
-        Axios.get("https://energymproject.herokuapp.com/userRoutine", {
+        Axios.get(global.backEndUrl + "/userRoutine", {
             params: { userData: user }
         })
             .then((res) => {
                 if (res.data.length > 0) {
-                    Axios.get("https://energymproject.herokuapp.com/userRoutine/getDetails", {
+                    Axios.get(global.backEndUrl + "/userRoutine/getDetails", {
                         params: { userData: user }
                     })
                         .then((respond) => {

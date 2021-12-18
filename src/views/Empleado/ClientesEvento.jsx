@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import global from "../../global.js"
 import Footer from "../../components/Footer";
 import Header from "../../components/Header";
 import HeaderStatus from "../../components/HeaderStatus";
@@ -15,7 +16,7 @@ export default function ClientesEvento() {
     const [idEvent] = useState(_id);
     const [nombreevento] = useState(Titulo);
     useEffect(() => {
-        Axios.get('https://energymproject.herokuapp.com/getClientesEvento', { params: { id: idEvent } })
+        Axios.get(global.backEndUrl + "/getClientesEvento", { params: { id: idEvent } })
             .then(response => setdataClientes(response.data));
     }, [idEvent]);
     const datatable = {

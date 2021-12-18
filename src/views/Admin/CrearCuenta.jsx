@@ -1,4 +1,5 @@
 import React, { useState, useRef } from "react";
+import global from "../../global.js"
 import Footer from "../../components/Footer";
 import Header from "../../components/Header";
 import HeaderStatus from "../../components/HeaderStatus";
@@ -45,7 +46,7 @@ function Register() {
         };
         if (passRef.current.value === confirmPassRef.current.value) {
             if (enteredAge >= 15 && cliente.tipoCuenta > 0) {
-                Axios.post("https://energymproject.herokuapp.com/register", cliente)
+                Axios.post(global.backEndUrl + "/register", cliente)
                     .then(response => {
                         if (response.data.message === "success") {
                             return swal("Éxito!", "La cuenta fue creada exitosamente!", "success");

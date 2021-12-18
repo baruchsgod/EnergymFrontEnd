@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import global from "../../global.js";
 import Footer from "../../components/Footer";
 import Header from "../../components/Header";
 import HeaderStatus from "../../components/HeaderStatus";
@@ -32,7 +33,7 @@ export default function Routine(props) {
         setError("");
         setMsg("");
         if (newRoutine) {
-            Axios.get("https://energymproject.herokuapp.com/userRoutine", {
+            Axios.get(global.backEndUrl + "/userRoutine", {
                 params: { userData: email }
             })
                 .then((res) => {
@@ -50,7 +51,7 @@ export default function Routine(props) {
                     }
                 })
         } else {
-            Axios.get("https://energymproject.herokuapp.com/userRoutine/getDetailsbyId", {
+            Axios.get(global.backEndUrl + "/userRoutine/getDetailsbyId", {
                 params: { userData: _id }
             })
                 .then((res) => {

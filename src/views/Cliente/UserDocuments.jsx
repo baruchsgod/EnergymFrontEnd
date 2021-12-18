@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import global from "../../global.js"
 import Axios from "axios";
 import Footer from "../../components/Footer";
 import Header from "../../components/Header";
@@ -14,7 +15,7 @@ export default function ListEvents() {
     const [userEvents, setUserEvents] = useState([]);
     useEffect(() => {
         if (userEvents.length === 0) {
-            Axios.get('https://energymproject.herokuapp.com/listUserDocuments', {
+            Axios.get(global.backEndUrl + "/listUserDocuments", {
                 withCredentials: true
             })
                 .then(response => setUserEvents(response.data));

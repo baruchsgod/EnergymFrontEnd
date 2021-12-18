@@ -1,4 +1,5 @@
 import {React, useEffect} from 'react';
+import global from "../global.js";
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCoffee, faSignOutAlt } from '@fortawesome/free-solid-svg-icons';
@@ -14,7 +15,7 @@ export default function Header() {
     useEffect(() => {
         const userCookie = localStorage.getItem('userName');
         if(!userCookie){
-            Axios.get("https://energymproject.herokuapp.com/user", {withCredentials: true})
+            Axios.get(global.backEndUrl + "/user", {withCredentials: true})
         .then(async (res) => {
             if (res.data === "") {
                 localStorage.clear();
@@ -28,12 +29,12 @@ export default function Header() {
         });
         }
         
-    }, []);
+    }, [history]);
     const logOut = () => {
         Axios({
             method: "GET",
             withCredentials: true,
-            url: "https://energymproject.herokuapp.com/logout",
+            url: global.backEndUrl + "/logout",
         }).then((res) => {
             if (res.data) {
                 localStorage.clear();

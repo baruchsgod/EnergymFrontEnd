@@ -1,9 +1,10 @@
 import React, {useEffect} from "react";
+import global from "../global.js";
 import Axios from "axios";
 
 export default function GetGoogleLogin(){
     useEffect(() => {
-        Axios.get("https://energymproject.herokuapp.com/user", {
+        Axios.get(global.backEndUrl + "/user", {
             withCredentials: true
           })
         .then((res) => {

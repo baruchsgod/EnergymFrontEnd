@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import global from "../../global.js"
 import Axios from "axios";
 import { Button } from "react-bootstrap";
 import Footer from "../../components/Footer";
@@ -15,7 +16,7 @@ export default function ListDiets() {
     const history = useHistory();
     const [userDiets, setUserDiets] = useState([]);
     useEffect(() => {
-        Axios.get('https://energymproject.herokuapp.com/listUserDiets', {
+        Axios.get(global.backEndUrl + "/listUserDiets", {
             withCredentials: true
         })
             .then(response => setUserDiets(response.data));

@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import global from "../../global.js"
 import Axios from "axios";
 import { Button } from "react-bootstrap";
 import Footer from "../../components/Footer";
@@ -15,7 +16,7 @@ export default function ListFeedback() {
     const [userFeedback, setUserFeedback] = useState([]);
     useEffect(() => {
         if (userFeedback.length === 0) {
-            Axios.get('https://energymproject.herokuapp.com/feedback/getRetroalimentacionCliente', {
+            Axios.get(global.backEndUrl + "/feedback/getRetroalimentacionCliente", {
                 withCredentials: true
             })
                 .then(response => setUserFeedback(response.data));

@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import global from "../../global.js"
 import { Button } from "react-bootstrap";
 import Footer from "../../components/Footer";
 import Header from "../../components/Header";
@@ -29,7 +30,7 @@ export default function ListFeedback() {
         let cuatro = 0;
         let cinco = 0;
         if (userFeedback.length === 0) {
-            Axios.get('https://energymproject.herokuapp.com/feedback/getRetroalimentacionAdmin')
+            Axios.get(global.backEndUrl + "/feedback/getRetroalimentacionAdmin")
                 .then(response => setUserFeedback(response.data));
         }
         if (userFeedback.length > 0) {

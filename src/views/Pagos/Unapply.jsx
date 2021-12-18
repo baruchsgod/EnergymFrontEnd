@@ -1,4 +1,5 @@
 import React, { useState, useRef, useEffect } from "react";
+import global from "../../global.js";
 import Footer from "../../components/Footer";
 import Header from "../../components/Header";
 import HeaderStatus from "../../components/HeaderStatus";
@@ -14,7 +15,7 @@ export default function UnapplyPayment() {
     const [employee, setEmployee] = useState();
     const [origin, setOrigin] = useState();
     useEffect(() => {
-        Axios.get("https://energymproject.herokuapp.com/userData", {
+        Axios.get(global.backEndUrl + "/userData", {
             withCredentials: true
           })
             .then((res) => {
@@ -25,7 +26,7 @@ export default function UnapplyPayment() {
         e.preventDefault();
         setTable([]);
         const document = documentRef.current.value;
-        Axios.get("https://energymproject.herokuapp.com/payments/find", {
+        Axios.get(global.backEndUrl + "/payments/find", {
             params: { document: document }
         })
             .then(async (res) => {
@@ -54,12 +55,12 @@ export default function UnapplyPayment() {
                 dangerMode: true,
             })
                 .then(async (value) => {
-                    Axios.get("https://energymproject.herokuapp.com/userDetails", {
+                    Axios.get(global.backEndUrl + "/userDetails", {
                         params: { idUser: value }
                     })
                         .then(async (res) => {
                             if (res.data.length > 0) {
-                                Axios.post("https://energymproject.herokuapp.com/payment/unapply", {
+                                Axios.post(global.backEndUrl + "/payment/unapply", {
                                     total: monto,
                                     email: res.data[0].email,
                                     option: "Credit",
@@ -96,12 +97,12 @@ export default function UnapplyPayment() {
                 dangerMode: true,
             })
                 .then(async (value) => {
-                    Axios.get("https://energymproject.herokuapp.com/userDetails", {
+                    Axios.get(global.backEndUrl + "/userDetails", {
                         params: { idUser: value }
                     })
                         .then(async (res) => {
                             if (res.data.length > 0) {
-                                Axios.post("https://energymproject.herokuapp.com/payment/unapply", {
+                                Axios.post(global.backEndUrl + "/payment/unapply", {
                                     total: monto,
                                     email: res.data[0].email,
                                     option: "Debit",

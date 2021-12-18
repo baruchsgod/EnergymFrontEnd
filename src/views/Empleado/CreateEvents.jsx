@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import global from "../../global.js";
 import Footer from "../../components/Footer";
 import Header from "../../components/Header";
 import HeaderStatus from "../../components/HeaderStatus";
@@ -14,7 +15,7 @@ const CreateEvents = () => {
     function createEvents(e) {
         e.preventDefault();
         const evento = { titulo, detalle, cupos, fecha, hora };
-        Axios.post("https://energymproject.herokuapp.com/createEvent", evento)
+        Axios.post(global.backEndUrl + "/createEvent", evento)
             .then(response => {
                 if (response.data.icon === "success") {
                     setTitulo("");

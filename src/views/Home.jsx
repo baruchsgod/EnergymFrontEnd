@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import global from "../global.js";
 import 'bootstrap/dist/css/bootstrap.min.css/';
 import Footer from "../components/Footer";
 import Header from "../components/Header";
@@ -21,7 +22,7 @@ export default function Home() {
     //     Axios({
     //         method: "GET",
     //         withCredentials: true,
-    //         url: "https://energymproject.herokuapp.com/user",
+    //         url: global.backEndUrl + "/user",
     //     }).then((res) => {
     //         if (res.data === "") {
     //             localStorage.clear();
@@ -44,7 +45,7 @@ export default function Home() {
     useEffect(() => {
         try {
             if (dataEvents.length === 0) {
-                Axios.get('https://energymproject.herokuapp.com/getRecentEvents')
+                Axios.get(global.backEndUrl + "/getRecentEvents")
                     .then(response => setDataEvents(response.data));
             }
         } catch (error) { }

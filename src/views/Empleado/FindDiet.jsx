@@ -1,4 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
+import global from "../../global.js";
 import Footer from "../../components/Footer";
 import Header from "../../components/Header";
 import Axios from "axios";
@@ -32,7 +33,7 @@ export default function Diet(props) {
         })
             .then((willDelete) => {
                 if (willDelete) {
-                    Axios.post("https://energymproject.herokuapp.com/userDiet/deleteDiet", { id: item._id })
+                    Axios.post(global.backEndUrl + "/userDiet/deleteDiet", { id: item._id })
                         .then(async response => {
                             if (response.data.icon === 'El usuario fue actualizado')
                                 return await swal("La dieta ha sido eliminada correctamente!", {
@@ -48,13 +49,13 @@ export default function Diet(props) {
         setCreate("");
         setTable([]);
         const user = userRef.current.value;
-        Axios.get("https://energymproject.herokuapp.com/userDiet", {
+        Axios.get(global.backEndUrl + "/userDiet", {
             params: { userData: user }
         })
             .then((res) => {
                 if (res.data.length > 0) {
                     setData(res.data);
-                    Axios.get("https://energymproject.herokuapp.com/userDiet/getDetails", {
+                    Axios.get(global.backEndUrl + "/userDiet/getDetails", {
                         params: { userData: user }
                     })
                         .then((response) => {

@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import global from "../../global.js"
 import Footer from "../../components/Footer";
 import Header from "../../components/Header";
 import HeaderStatus from "../../components/HeaderStatus";
@@ -21,7 +22,7 @@ const ReserveEvent = () => {
         e.preventDefault();
         const reserva = { idEvent, cuposReserva };
         if (cuposReserva >= 1 && cuposReserva <= 5) {
-            Axios.post("https://energymproject.herokuapp.com/reservaEventoPost", reserva, {
+            Axios.post(global.backEndUrl + "/reservaEventoPost", reserva, {
                 withCredentials: true
             })
                 .then(response => {

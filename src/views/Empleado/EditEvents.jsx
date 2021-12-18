@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import global from "../../global.js";
 import Footer from "../../components/Footer";
 import Header from "../../components/Header";
 import HeaderStatus from "../../components/HeaderStatus";
@@ -20,7 +21,7 @@ const EditEvents = () => {
     function editEvents(e) {
         e.preventDefault();
         const evento = { id, TituloE, DetalleE, CuposE, FechaE, HoraE };
-        Axios.post("https://energymproject.herokuapp.com/editEvent", evento)
+        Axios.post(global.backEndUrl + "/editEvent", evento)
             .then(response => {
                 if (response.data.icon === "success") {
                     swal(response.data.title, response.data.message, response.data.icon);

@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import global from "../../global.js"
 import Footer from "../../components/Footer";
 import Header from "../../components/Header";
 import HeaderStatus from "../../components/HeaderStatus";
@@ -27,7 +28,7 @@ const UserSettings = () => {
     const [backUrl, setBackUrl] = useState('');
     useEffect(() => {
         getHeaderData();
-        Axios.get('https://energymproject.herokuapp.com/userData', {
+        Axios.get(global.backEndUrl + "/userData", {
             withCredentials: true
         })
             .then((res) => {
@@ -62,7 +63,7 @@ const UserSettings = () => {
         }
         if (enteredAge >= 12) {
             const cliente = { userId, name, lname, phone, email, tipoCuenta, username, date, province, postal, detalle };
-            Axios.post("https://energymproject.herokuapp.com/userDataPost", cliente, {
+            Axios.post(global.backEndUrl + "/userDataPost", cliente, {
                 withCredentials: true
             })
                 .then(response => {
@@ -77,7 +78,7 @@ const UserSettings = () => {
         e.preventDefault();
         if (newPass === confirmPass) {
             const passData = { userId, pass, newPass };
-            Axios.post("https://energymproject.herokuapp.com/userPasswordPost", passData, {
+            Axios.post(global.backEndUrl + "/userPasswordPost", passData, {
                 withCredentials: true
             })
                 .then(response => {

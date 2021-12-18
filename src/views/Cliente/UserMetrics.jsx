@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import global from "../../global.js"
 import Axios from "axios";
 import { Button } from "react-bootstrap";
 import Footer from "../../components/Footer";
@@ -13,7 +14,7 @@ export default function ListMetrics() {
     const [graficaSelected, setgraficaSelected] = useState("");
     useEffect(() => {
         if (userMetrics.length === 0) {
-            Axios.get('https://energymproject.herokuapp.com/listUserMetrics', {
+            Axios.get(global.backEndUrl + "/listUserMetrics", {
                 withCredentials: true
             })
                 .then(response => setUserMetrics(response.data));

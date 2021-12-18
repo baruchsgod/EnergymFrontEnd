@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
+import global from "../../global.js"
 import Footer from "../../components/Footer";
 import Header from "../../components/Header";
 import HeaderStatus from "../../components/HeaderStatus";
@@ -15,7 +16,7 @@ function Register() {
     const history = useHistory();
     useEffect(() => {
         if (dataAccounts.length === 0) {
-            Axios.get('https://energymproject.herokuapp.com/user', {
+            Axios.get(global.backEndUrl + "/user", {
                 withCredentials: true
             })
                 .then(response => setDataAccounts(response.data));
@@ -41,7 +42,7 @@ function Register() {
             })
                 .then((willDelete) => {
                     if (willDelete) {
-                        Axios.post("https://energymproject.herokuapp.com/desactivarCliente", cliente, {
+                        Axios.post(global.backEndUrl + "/desactivarCliente", cliente, {
                             withCredentials: true
                         })
                             .then(response => {
@@ -52,7 +53,7 @@ function Register() {
                                 });
                             });
                     }
-                    Axios.get('https://energymproject.herokuapp.com/logout', {
+                    Axios.get(global.backEndUrl + "/logout", {
                         withCredentials: true
                     })
                         .then((res) => {
@@ -64,7 +65,7 @@ function Register() {
                             //console.log(error); ******Evitar los console.log*****
                         });
                     // DESACTIVO MAILCHIMP  
-                    Axios.post("https://energymproject.herokuapp.com/unsuscribed", cliente, {
+                    Axios.post(global.backEndUrl + "/unsuscribed", cliente, {
                         withCredentials: true
                     })
                         .then(response => {
@@ -78,7 +79,7 @@ function Register() {
                             //console.log(err);
                         });
                     // Me desactivar en la DB el estado de suscrito de Mailchip.
-                    Axios.post("https://energymproject.herokuapp.com/desactivarSuscripcionMailchip", cliente, {
+                    Axios.post(global.backEndUrl + "/desactivarSuscripcionMailchip", cliente, {
                         withCredentials: true
                     })
                         .then(response => {

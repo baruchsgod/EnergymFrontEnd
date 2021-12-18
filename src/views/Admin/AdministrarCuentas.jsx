@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import global from "../../global.js"
 import Footer from "../../components/Footer";
 import Header from "../../components/Header";
 import HeaderStatus from "../../components/HeaderStatus";
@@ -14,7 +15,7 @@ export default function ListEvents() {
     const [dataAccounts, setDataAccounts] = useState([]);
     useEffect(() => {
         if (dataAccounts.length === 0) {
-            Axios.get('https://energymproject.herokuapp.com/adminAccounts')
+            Axios.get(global.backEndUrl + "/adminAccounts")
                 .then(response => setDataAccounts(response.data));
         }
     });
@@ -31,7 +32,7 @@ export default function ListEvents() {
         })
             .then((willDelete) => {
                 if (willDelete) {
-                    Axios.post("https://energymproject.herokuapp.com/estadoCuenta", cuenta)
+                    Axios.post(global.backEndUrl + "/estadoCuenta", cuenta)
                         .then(response => {
                             if (response.data.icon === 'success')
                                 setDataAccounts([]);
@@ -56,7 +57,7 @@ export default function ListEvents() {
                 if (willDelete) {
                     let correo = localStorage.getItem("correo");
                     if (cuenta.email !== correo) {
-                        Axios.post("https://energymproject.herokuapp.com/estadoCuenta", cuenta)
+                        Axios.post(global.backEndUrl + "/estadoCuenta", cuenta)
                             .then(response => {
                                 if (response.data.icon === 'success')
                                     setDataAccounts([]);

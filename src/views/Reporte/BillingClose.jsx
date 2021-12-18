@@ -1,4 +1,5 @@
 import React, { useRef, useState } from "react";
+import global from "../../global.js";
 import Footer from "../../components/Footer";
 import Header from "../../components/Header";
 import HeaderStatus from "../../components/HeaderStatus";
@@ -17,7 +18,7 @@ export default function BillingClose(e) {
         e.preventDefault();
         const dateReport = dateRef.current.value;
 
-        Axios.get("https://energymproject.herokuapp.com/report/close/billing", {
+        Axios.get(global.backEndUrl + "/report/close/billing", {
             params: { date: dateReport }
         })
             .then(async (res) => {

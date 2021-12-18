@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import global from "../../global.js";
 import { Button } from "react-bootstrap";
 import Footer from "../../components/Footer";
 import Header from "../../components/Header";
@@ -23,7 +24,7 @@ export default function ListMetrics() {
     function findCustomer(e) {
         e.preventDefault();
         if (correoCliente !== "") {
-            Axios.get("https://energymproject.herokuapp.com/getUserMetricsEmpleado", {
+            Axios.get(global.backEndUrl + "/getUserMetricsEmpleado", {
                 params: { correoCliente: correoCliente }
             })
                 .then(response => response.data.length > 0 ? actualizarGrafica(response.data) : clienteInexistente());

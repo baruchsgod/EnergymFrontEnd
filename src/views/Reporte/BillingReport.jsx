@@ -1,4 +1,5 @@
 import React, { useState, useRef, useEffect } from "react";
+import global from "../../global.js";
 import Footer from "../../components/Footer";
 import Header from "../../components/Header";
 import HeaderStatus from "../../components/HeaderStatus";
@@ -12,7 +13,6 @@ import { faSearch } from '@fortawesome/free-solid-svg-icons';
 export default function BillingReport(props) {
     const history = useHistory();
     const [error, setError] = useState();
-    //const [report, setReport] = useState([]);
     const [table, setTable] = useState([]);
     const [date, setDate] = useState();
     const [loading] = useState(false);
@@ -40,7 +40,7 @@ export default function BillingReport(props) {
         setError("");
         const user = userRef.current.value;
         setEmail(user);
-        Axios.get("https://energymproject.herokuapp.com/userDetails", {
+        Axios.get(global.backEndUrl + "/userDetails", {
             params: { idUser: user }
         })
             .then((res) => {
@@ -148,7 +148,7 @@ export default function BillingReport(props) {
                         estado: "Abierto",
                         date: date1
                     }
-                    Axios.post("https://energymproject.herokuapp.com/report/billing", report)
+                    Axios.post(global.backEndUrl + "/report/billing", report)
                         .then(async response => {
                             if (response.data.length > 0) {
                                 //setReport(response.data);
@@ -181,7 +181,7 @@ export default function BillingReport(props) {
                             date1: date2,
                             date2: date3
                         };
-                        Axios.post("https://energymproject.herokuapp.com/report/billing", report)
+                        Axios.post(global.backEndUrl + "/report/billing", report)
                             .then(async response => {
                                 console.log("este es el largo " + response.data.length);
                                 if (response.data.length > 0) {
@@ -222,7 +222,7 @@ export default function BillingReport(props) {
                             date1: date4,
                             date2: date5
                         };
-                        Axios.post("https://energymproject.herokuapp.com/report/billing", report)
+                        Axios.post(global.backEndUrl + "/report/billing", report)
                             .then(async response => {
                                 if (response.data.length > 0) {
                                     //setReport(response.data);

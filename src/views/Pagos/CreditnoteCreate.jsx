@@ -1,4 +1,5 @@
-import React, { useState, useRef, useEffect } from 'react'
+import React, { useState, useRef, useEffect } from 'react';
+import global from "../../global.js";
 import Footer from "../../components/Footer";
 import Header from "../../components/Header";
 import Axios from "axios";
@@ -27,7 +28,7 @@ export default function Diet(props) {
     const userRef = useRef();
     useEffect(() => {
         if (newPayment) {
-            Axios.get("https://energymproject.herokuapp.com/userData", {
+            Axios.get(global.backEndUrl + "/userData", {
                 withCredentials: true
               })
                 .then((res) => {
@@ -55,7 +56,7 @@ export default function Diet(props) {
             email: email
         }
         if(montoRef.current.value > 1 && montoRef.current.value <= 500000){
-            Axios.post("https://energymproject.herokuapp.com/payments/creates", pago)
+            Axios.post(global.backEndUrl + "/payments/creates", pago)
             .then(async response => {
                 if (response.data.length > 0) {
                     setPayment(response.data);

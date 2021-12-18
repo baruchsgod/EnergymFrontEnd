@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import global from "../../global.js";
 import Footer from "../../components/Footer";
 import Header from "../../components/Header";
 import Axios from "axios";
@@ -11,7 +12,7 @@ export default function BalanceInitial(props) {
     const [name, setName] = useState("");
     const [email, setEmail] = useState("");
     useEffect(() => {
-        Axios.get("https://energymproject.herokuapp.com/userData", {
+        Axios.get(global.backEndUrl + "/userData", {
             withCredentials: true
           })
             .then((res) => {

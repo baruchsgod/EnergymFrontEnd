@@ -1,4 +1,5 @@
-import React, { useState, useRef } from 'react'
+import React, { useState, useRef } from 'react';
+import global from "../../global.js";
 import Footer from "../../components/Footer";
 import Header from "../../components/Header";
 import Axios from "axios";
@@ -28,7 +29,7 @@ export default function TextEditor() {
         })
             .then(async (willDelete) => {
                 if (willDelete) {
-                    Axios.post("https://energymproject.herokuapp.com/userRoutine/deleteRoutine", { id: item._id })
+                    Axios.post(global.backEndUrl + "/userRoutine/deleteRoutine", { id: item._id })
                         .then(async response => {
                             if (response.data.icon === 'El usuario fue actualizado')
                                 return await swal("La rutina ha sido eliminada correctamente!", {
@@ -48,13 +49,13 @@ export default function TextEditor() {
         setCreate("");
         setTable([]);
         const user = userRef.current.value;
-        Axios.get("https://energymproject.herokuapp.com/userRoutine", {
+        Axios.get(global.backEndUrl + "/userRoutine", {
             params: { userData: user }
         })
             .then((res) => {
                 if (res.data.length > 0) {
                     setData(res.data);
-                    Axios.get("https://energymproject.herokuapp.com/userRoutine/getDetails", {
+                    Axios.get(global.backEndUrl + "/userRoutine/getDetails", {
                         params: { userData: user }
                     })
                         .then((respond) => {

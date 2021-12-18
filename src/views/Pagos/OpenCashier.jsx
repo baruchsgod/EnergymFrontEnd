@@ -1,4 +1,5 @@
 import React, { useState, useRef, useEffect } from "react";
+import global from "../../global.js";
 import Footer from "../../components/Footer";
 import Header from "../../components/Header";
 import HeaderStatus from "../../components/HeaderStatus";
@@ -16,12 +17,12 @@ export default function OpenCashier() {
     const [_id, set_Id] = useState();
     const history = useHistory();
     useEffect(() => {
-        Axios.get("https://energymproject.herokuapp.com/payment/setBalance")
+        Axios.get(global.backEndUrl + "/payment/setBalance")
             .then(async (res) => {
                 if (res.data.length > 0) {
                     setInitial(res.data[0].SaldoInicial);
                     set_Id(res.data[0]._id);
-                    Axios.get("https://energymproject.herokuapp.com/userData", {
+                    Axios.get(global.backEndUrl + "/userData", {
                         withCredentials: true
                       })
                         .then((res) => {
@@ -44,7 +45,7 @@ export default function OpenCashier() {
     const categoriaRef = useRef();
     function setOption(props) {
         if (props === 1) {
-            Axios.get("https://energymproject.herokuapp.com/Payment/Open", {
+            Axios.get(global.backEndUrl + "/Payment/Open", {
                 params: { email: email }
             })
                 .then(async (res) => {
@@ -62,7 +63,7 @@ export default function OpenCashier() {
                         })
                             .then(async (value) => {
                                 if (value) {
-                                    Axios.post("https://energymproject.herokuapp.com/payment/arching", {
+                                    Axios.post(global.backEndUrl + "/payment/arching", {
                                         monto: 0,
                                         initial: initial,
                                         email: email,
@@ -88,7 +89,7 @@ export default function OpenCashier() {
                     }
                 })
         } else if (props === 2) {
-            Axios.get("https://energymproject.herokuapp.com/Payment/Open", {
+            Axios.get(global.backEndUrl + "/Payment/Open", {
                 params: { email: email }
             })
                 .then(async (res) => {
@@ -103,7 +104,7 @@ export default function OpenCashier() {
                     }
                 });
         } else {
-            Axios.get("https://energymproject.herokuapp.com/Payment/Open", {
+            Axios.get(global.backEndUrl + "/Payment/Open", {
                 params: { email: email }
             })
                 .then(async (res) => {
@@ -121,7 +122,7 @@ export default function OpenCashier() {
                         })
                             .then(async (value) => {
                                 if (value) {
-                                    Axios.post("https://energymproject.herokuapp.com/payment/arching", {
+                                    Axios.post(global.backEndUrl + "/payment/arching", {
                                         monto: 0,
                                         initial: 0,
                                         email: email,
@@ -134,7 +135,7 @@ export default function OpenCashier() {
                                                     icon: "success"
                                                 });
 
-                                                history.push("https://energymproject.herokuapp.com/EmpleadoMenuCaja");
+                                                history.push(global.backEndUrl + "/EmpleadoMenuCaja");
                                             } else if (res.data.length === 2) {
                                                 return await swal(res.data[1].message, {
                                                     icon: "error"
@@ -173,7 +174,7 @@ export default function OpenCashier() {
             })
                 .then(async (value) => {
                     if (value) {
-                        Axios.post("https://energymproject.herokuapp.com/payment/arching", {
+                        Axios.post(global.backEndUrl + "/payment/arching", {
                             monto: monto,
                             categoria: categoria,
                             initial: initial,

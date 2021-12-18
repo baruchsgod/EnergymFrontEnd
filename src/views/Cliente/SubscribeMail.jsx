@@ -1,4 +1,5 @@
 import React, { useState, useRef, useEffect } from "react";
+import global from "../../global.js"
 import Footer from "../../components/Footer";
 import Header from "../../components/Header";
 import HeaderStatus from "../../components/HeaderStatus";
@@ -14,7 +15,7 @@ function Register() {
     // Obtiene datos del usuario conectado. 
     useEffect(() => {
         if (dataAccounts.length === 0) {
-            Axios.get('https://energymproject.herokuapp.com/user', {
+            Axios.get(global.backEndUrl + "/user", {
                 withCredentials: true
             })
                 .then(response => setDataAccounts(response.data));
@@ -32,7 +33,7 @@ function Register() {
         };
         if (emailRef.current.value === dataAccounts.email || !dataAccounts.subscripcionMailchip === "true") {
             if (dataAccounts.subscripcionMailchip === "false") {
-                Axios.post("https://energymproject.herokuapp.com/validarSuscripcionMailchip", cliente, {
+                Axios.post(global.backEndUrl + "/validarSuscripcionMailchip", cliente, {
                     withCredentials: true
                 })
                     .then(response => {
@@ -41,7 +42,7 @@ function Register() {
                         }
 
                     });
-                Axios.post("https://energymproject.herokuapp.com/subscribe", cliente, {
+                Axios.post(global.backEndUrl + "/subscribe", cliente, {
                     withCredentials: true
                 })
                     .then(response => {
@@ -56,7 +57,7 @@ function Register() {
                         //console.log(err);
                     });
             } if (dataAccounts.subscripcionMailchip === "subscrito") {
-                Axios.post("https://energymproject.herokuapp.com/reactivarSubscripcion", cliente, {
+                Axios.post(global.backEndUrl + "/reactivarSubscripcion", cliente, {
                     withCredentials: true
                 })
                     .then(response => {

@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import global from "../../global.js"
 import { Button } from "react-bootstrap";
 import Axios from "axios";
 import { Link } from "react-router-dom";
@@ -15,7 +16,7 @@ export default function ListRoutines() {
     const [userRoutines, setUserRoutines] = useState([]);
     useEffect(() => {
         if (userRoutines.length === 0) {
-            Axios.get('https://energymproject.herokuapp.com/listUserRoutines', {
+            Axios.get(global.backEndUrl + "/listUserRoutines", {
                 withCredentials: true
             })
                 .then(response => setUserRoutines(response.data))

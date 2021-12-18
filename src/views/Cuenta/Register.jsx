@@ -1,4 +1,5 @@
 import React, { useState, useRef } from "react";
+import global from "../../global.js"
 import Footer from "../../components/Footer";
 import Axios from "axios";
 import { useHistory } from "react-router-dom";
@@ -44,7 +45,7 @@ function Register() {
         };
         if (passRef.current.value === confirmPassRef.current.value) {
             if (enteredAge >= 12) {
-                Axios.post("https://energymproject.herokuapp.com/register", cliente)
+                Axios.post(global.backEndUrl + "/register", cliente)
                     .then(response => {
                         if (response.data.message === "success") {
                             swal("Cuenta creada correctamente, puedes iniciar sesión!", {

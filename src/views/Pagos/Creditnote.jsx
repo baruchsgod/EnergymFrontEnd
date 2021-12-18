@@ -1,4 +1,5 @@
 import React, { useRef, useState } from "react";
+import global from "../../global.js";
 import Footer from "../../components/Footer";
 import Header from "../../components/Header";
 import Axios from "axios";
@@ -23,15 +24,15 @@ export default function Membership(props) {
         setMsg("");
         setTable([]);
         const user = userRef.current.value;
-        Axios.get("https://energymproject.herokuapp.com/userDetails", {
+        Axios.get(global.backEndUrl + "/userDetails", {
             params: { idUser: user }
         })
             .then(async (res) => {
                 if (res.data.length > 0) {
-                    Axios.get("https://energymproject.herokuapp.com/user", {withCredentials: true})
+                    Axios.get(global.backEndUrl + "/user", {withCredentials: true})
                     .then(async (resp) => {
                         if(resp.data){
-                            Axios.get("https://energymproject.herokuapp.com/payment/reject", {
+                            Axios.get(global.backEndUrl + "/payment/reject", {
                                 params:{userId:resp.data.email}
                             })
                             .then(async (response) => {

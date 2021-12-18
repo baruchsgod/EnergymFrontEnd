@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import global from "../../global.js";
 import Footer from "../../components/Footer";
 import Header from "../../components/Header";
 import HeaderStatus from "../../components/HeaderStatus";
@@ -11,7 +12,7 @@ import { faEye } from '@fortawesome/free-solid-svg-icons';
 export default function OverDue() {
     const [details, setDetails] = useState([]);
     useEffect(() => {
-        Axios.get("https://energymproject.herokuapp.com/payment/overdue", {
+        Axios.get(global.backEndUrl + "/payment/overdue", {
             params: { option: "Mensual" }
         })
             .then((res) => {

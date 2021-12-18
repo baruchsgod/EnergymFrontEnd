@@ -1,4 +1,5 @@
 import React, { useState, useRef } from "react";
+import global from "../../global.js"
 import Footer from "../../components/Footer"
 import { Button, Alert, Label, Input, FormGroup } from "reactstrap";
 import { Link } from "react-router-dom";
@@ -25,7 +26,7 @@ function Login() {
       username: emailRef.current.value,
       password: passwordRef.current.value
     };
-    Axios.post("https://energymproject.herokuapp.com/activar", login, {
+    Axios.post(global.backEndUrl + "/activar", login, {
       withCredentials: true
     })
       .then(response => {
@@ -34,7 +35,7 @@ function Login() {
         } else if (response.data === "No User Exists") {
           setError("Su contraseña o usuario estan incorrectos");
         } else if (response.data === "Su cuenta se encuentra INACTIVA!") {
-          Axios.post("https://energymproject.herokuapp.com/activarCliente", login, {
+          Axios.post(global.backEndUrl + "/activarCliente", login, {
             withCredentials: true
           })
             .then(response => {

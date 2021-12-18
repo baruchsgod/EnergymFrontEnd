@@ -1,4 +1,5 @@
 import React from 'react';
+import global from "../global.js";
 import { Link } from "react-router-dom";
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -27,7 +28,7 @@ export default function RoutineStructure(props) {
         })
         .then(async (value) => {
             if (value) {
-                Axios.post("https://energymproject.herokuapp.com/userRoutine/deleteOneRoutine", idRemove)
+                Axios.post(global.backEndUrl + "/userRoutine/deleteOneRoutine", idRemove)
                     .then(async (res) => {
                         if (res.data.length === 2) {
                             await swal("La rutina de "+type+" del dia "+day+" se ha borrado exitosamente!", {

@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import global from "../../global.js";
 import Footer from "../../components/Footer";
 import Header from "../../components/Header";
 import Axios from "axios";
@@ -23,7 +24,7 @@ export default function FindMetrics() {
 
     function findCustomerButton(e) {
         e.preventDefault();
-        Axios.get("https://energymproject.herokuapp.com/getUserMetricsEmpleado", {
+        Axios.get(global.backEndUrl + "/getUserMetricsEmpleado", {
             params: { correoCliente: email }
         })
             .then((res) => {

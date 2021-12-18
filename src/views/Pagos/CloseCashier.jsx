@@ -1,4 +1,5 @@
 import React, { useEffect, useState, useRef } from "react";
+import global from "../../global.js";
 import Footer from "../../components/Footer";
 import Header from "../../components/Header";
 import HeaderStatus from "../../components/HeaderStatus";
@@ -29,11 +30,11 @@ export default function CloseCash(props) {
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
     useEffect(async () => {
-        await Axios.get("https://energymproject.herokuapp.com/userData", {
+        await Axios.get(global.backEndUrl + "/userData", {
             withCredentials: true
           })
             .then(async (res) => {
-                await Axios.get("https://energymproject.herokuapp.com/Payment/getClosure", {
+                await Axios.get(global.backEndUrl + "/Payment/getClosure", {
                     params: { email: res.data.email }
                 })
                     .then(async (res) => {
@@ -61,18 +62,18 @@ export default function CloseCash(props) {
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
     useEffect(async () => {
-        await Axios.get("https://energymproject.herokuapp.com/userData", {
+        await Axios.get(global.backEndUrl + "/userData", {
             withCredentials: true
           })
             .then(async (res) => {
-                await Axios.get("https://energymproject.herokuapp.com/Payment/Open", {
+                await Axios.get(global.backEndUrl + "/Payment/Open", {
                     params: { email: res.data.email }
                 })
                     .then(async (res) => {
                         if (res.data.length > 0) {
                             setPayment(res.data);
                             setId(res.data[0]._id);
-                            await Axios.get("https://energymproject.herokuapp.com/payment/documents", {
+                            await Axios.get(global.backEndUrl + "/payment/documents", {
                                 params: { email: res.data[0].Empleado }
                             })
                                 .then(async (respond) => {

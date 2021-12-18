@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import global from "../../global.js"
 import Footer from "../../components/Footer";
 import Header from "../../components/Header";
 import HeaderStatus from "../../components/HeaderStatus";
@@ -23,7 +24,7 @@ const CreateEvents = () => {
     function createEvents(e) {
         e.preventDefault();
         const metrica = { email, fecha, altura, grasaCorporal, biceps, cintura, piernas, espalda };
-        Axios.post("https://energymproject.herokuapp.com/crearMetrica", metrica)
+        Axios.post(global.backEndUrl + "/crearMetrica", metrica)
             .then(response => {
                 if (response.data.icon === "success") {
                     setEmailToGraphics(email);

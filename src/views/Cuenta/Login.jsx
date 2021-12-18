@@ -1,4 +1,5 @@
 import React, { useState, useRef } from "react";
+import global from "../../global.js"
 import Footer from "../../components/Footer"
 import { Button, Alert, Label, Input, FormGroup } from "reactstrap";
 import { Link } from "react-router-dom";
@@ -7,12 +8,7 @@ import GymLogo from "../../public/img/gym-logo.png";
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { faGoogle, faFacebookF } from '@fortawesome/free-brands-svg-icons';
 import swal from 'sweetalert';
-import img1 from "../../public/img/Vector-1.svg";
-import img2 from "../../public/img/Vector-2.svg";
-import img3 from "../../public/img/Vector-3.svg";
 import img4 from "../../public/img/Vector-4.svg";
-
-
 library.add(faGoogle, faFacebookF)
 function Login() {
   const emailRef = useRef();
@@ -26,7 +22,7 @@ function Login() {
       password: passwordRef.current.value
     };
 
-    Axios.post("https://energymproject.herokuapp.com/login", login, {
+    Axios.post(global.backEndUrl + "/login", login, {
       withCredentials: true
     })
       .then(response => {
@@ -45,7 +41,7 @@ function Login() {
           })
             .then((willDelete) => {
               if (willDelete) {
-                Axios.post("https://energymproject.herokuapp.com/activarCliente", login)
+                Axios.post(global.backEndUrl + "/activarCliente", login)
                   .then(response => {
                     if (response.data.icon === 'success')
                       return swal("Su cuenta ha sido Activada", {
@@ -75,7 +71,7 @@ function Login() {
     localStorage.setItem("isAuth", true);
     localStorage.setItem("tipoCuenta", "Cliente");
     localStorage.setItem("userName", "");
-    window.open("https://energymproject.herokuapp.com/auth/google", "_self");
+    window.open(global.backEndUrl + "/auth/google", "_self");
   }
 
   return (<div>

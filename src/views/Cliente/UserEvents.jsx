@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import global from "../../global.js"
 import Axios from "axios";
 import { Button } from "react-bootstrap";
 import Footer from "../../components/Footer";
@@ -15,7 +16,7 @@ export default function ListEvents() {
     const [userEvents, setUserEvents] = useState([]);
     useEffect(() => {
         if (userEvents.length === 0) {
-            Axios.get('https://energymproject.herokuapp.com/listUserEvents', {
+            Axios.get(global.backEndUrl + "/listUserEvents", {
                 withCredentials: true
             })
                 .then(response => setUserEvents(response.data))
@@ -33,7 +34,7 @@ export default function ListEvents() {
         })
             .then((willDelete) => {
                 if (willDelete) {
-                    Axios.post("https://energymproject.herokuapp.com/borrarReserva", reserva, {
+                    Axios.post(global.backEndUrl + "/borrarReserva", reserva, {
                         withCredentials: true
                     })
                         .then(response => {

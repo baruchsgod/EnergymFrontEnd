@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import global from "../../global.js";
 import Footer from "../../components/Footer";
 import Header from "../../components/Header";
 import HeaderStatus from "../../components/HeaderStatus";
@@ -22,7 +23,7 @@ const CreateEvents = () => {
     function editarMetrica(e) {
         e.preventDefault();
         const metrica = { id, email, fecha, altura, grasaCorporal, biceps, cintura, piernas, espalda };
-        Axios.post("https://energymproject.herokuapp.com/editarMetrica", metrica)
+        Axios.post(global.backEndUrl + "/editarMetrica", metrica)
             .then(response => {
                 if (response.data.icon === "success") {
                     swal(response.data.title, response.data.message, response.data.icon);

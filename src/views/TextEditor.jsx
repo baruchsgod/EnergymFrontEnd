@@ -1,4 +1,5 @@
-import React, { useState, useRef } from 'react'
+import React, { useState, useRef } from 'react';
+import global from "../global.js";
 import Footer from "../components/Footer";
 import Header from "../components/Header";
 import swal from 'sweetalert';
@@ -44,7 +45,7 @@ export default function TextEditor(props) {
                 details: text,
                 option: localStorage.getItem("option")
             }
-            Axios.post("https://energymproject.herokuapp.com/routine", routineInfo)
+            Axios.post(global.backEndUrl + "/routine", routineInfo)
                 .then(response => {
                     //console.log("this is the responde from update "+response);
                     if (response.data.message !== "El usuario fue actualizado") {
@@ -66,7 +67,7 @@ export default function TextEditor(props) {
                 _id: _ids,
                 details: detail
             }
-            Axios.post("https://energymproject.herokuapp.com/userRoutine/modifyOneRoutine", routineInfo)
+            Axios.post(global.backEndUrl + "/userRoutine/modifyOneRoutine", routineInfo)
                 .then(async response => {
                     //console.log("this is the responde from update "+response);
                     if (response.data.length === 2) {

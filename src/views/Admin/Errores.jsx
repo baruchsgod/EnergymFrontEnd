@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import global from "../../global.js"
 import Axios from "axios";
 import Footer from "../../components/Footer";
 import Header from "../../components/Header";
@@ -11,7 +12,7 @@ export default function ListEvents() {
     const [dataAccounts, setDataAccounts] = useState([]);
     useEffect(() => {
         if (dataAccounts.length === 0) {
-            Axios.get('https://energymproject.herokuapp.com/listaErrores', {
+            Axios.get(global.backEndUrl + "/listaErrores", {
                 withCredentials: true
             })
                 .then(response => setDataAccounts(response.data));
